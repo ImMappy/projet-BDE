@@ -5,6 +5,23 @@
 {% block body %}
 
 <h1 class="text-center my-5">Sorties</h1>
+    <h2 class="text-center">Filtrer les sorties</h2>
+    <form method="post" class="border w-50 mx-auto my-4 p-5">
+        <div>
+            <label for="campus">Campus</label>
+            <select name="campus" id="campus"></select>
+        </div>
+        <div>
+            <label for="nom">Nom contenant</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="dateBegin">Entre</label>
+            <input type="date" name="dateBegin" id="dateBegin">
+            <label for="dateEnd">et</label>
+            <input type="date" name="dateEnd" id="dateEnd">
+        </div>
+    </form>
     <table class="table table-striped container">
         <thead>
         <tr>
