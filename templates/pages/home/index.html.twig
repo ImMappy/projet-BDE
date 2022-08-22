@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Sorties{% endblock %}
 
 {% block body %}
+
 <h1 class="text-center my-5">Sorties</h1>
     <table class="table table-striped container">
         <thead>
@@ -22,13 +23,14 @@
             <tr scope="row">
                 <th>{{ sortie.nom}}</th>
                 <td>{{ sortie.dateHeureDebut | date("d/m/Y") }}</td>
-
-                <td></td>
-                <td></td>
+                <td>{{ sortie.dateLimiteInscription | date("d/m/Y") }}</td>
+                <td>{{ sortie.nbInscriptionsMax }}</td>
+                <td>{{ sortie.etat}}</td>
             </tr>
         {% endfor %}
         </tbody>
-
     </table>
-
+        <div class="navigation d-flex justify-content-center">
+            {{ knp_pagination_render(sorties) }}
+        </div>
 {% endblock %}
