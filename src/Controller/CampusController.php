@@ -16,7 +16,7 @@ class CampusController extends AbstractController
     #[Route('/', name: 'app_campus_index', methods: ['GET'])]
     public function index(CampusRepository $campusRepository): Response
     {
-        return $this->render('campus/index.html.twig', [
+        return $this->render('pages/campus/index.html.twig', [
             'campuses' => $campusRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class CampusController extends AbstractController
             return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('campus/new.html.twig', [
+        return $this->renderForm('pages/campus/new.html.twig', [
             'campus' => $campus,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class CampusController extends AbstractController
     #[Route('/{id}', name: 'app_campus_show', methods: ['GET'])]
     public function show(Campus $campus): Response
     {
-        return $this->render('campus/show.html.twig', [
+        return $this->render('pages/campus/show.html.twig', [
             'campus' => $campus,
         ]);
     }
@@ -60,7 +60,7 @@ class CampusController extends AbstractController
             return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('campus/edit.html.twig', [
+        return $this->renderForm('pages/campus/edit.html.twig', [
             'campus' => $campus,
             'form' => $form,
         ]);

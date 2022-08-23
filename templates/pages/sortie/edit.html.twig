@@ -3,11 +3,43 @@
 {% block title %}Edit Sortie{% endblock %}
 
 {% block body %}
-    <h1>Edit Sortie</h1>
+    <a href="{{ path('app_sortie_index') }}" class="btn btn-outline-info mx-5 mt-4">Revenir a la liste</a>
+    <h1 class="text-center my-5">Edit Sortie</h1>
+        {{ form_start(form) }}
+        {{ form_row(form._token) }}
+    <section class="w-75 mx-auto">
+        <div class="form-group">
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.dateHeureDebut) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.duree) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.dateLimiteInscription) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.nbInscriptionsMax) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.etat) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.infosSortie) }}
+        </div>
+        <div class="d-flex justify-content-center my-4">
+            {{ form_row(form.submit) }}
+            {{ form_end(form) }}
 
-    {{ include('pages/sortie/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('pages/sortie/_delete_form.html.twig') }}
+        </div>
+    </section>
+        {#    {{ include('pages/sortie/_form.html.twig', {'button_label': 'Update'}) }}#}
 
-    <a href="{{ path('app_sortie_index') }}">back to list</a>
 
-    {{ include('pages/sortie/_delete_form.html.twig') }}
+
+
+
 {% endblock %}

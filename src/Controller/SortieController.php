@@ -49,15 +49,6 @@ class SortieController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/{id}', name: 'app_sortie_show', methods: ['GET'])]
-    public function show(Sortie $sortie): Response
-    {
-        return $this->render('pages/sortie/show.html.twig', [
-            'sortie' => $sortie,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_sortie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
