@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
-                <h2>pseudo User</h2> {# pseudo User #}
+                <h1>{{ app.user.pseudo }}</h1> {# pseudo User #}
             </div>
         </div>
         <div class="row">
@@ -21,7 +21,7 @@
                         Prénom :
                     </div>
                     <div class="col">
-                        prénom {# prénom #}
+                        {{ app.user.prenom }}
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                         Nom :
                     </div>
                     <div class="col">
-                        nom {# nom #}
+                        {{ app.user.nom }}
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                         Téléphone :
                     </div>
                     <div class="col">
-                        06.01.02.03.04 {# tél #}
+                        {{ app.user.telephone }}
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                         Email :
                     </div>
                     <div class="col">
-                        email@campus-eni.fr {# email #}
+                        {{ app.user.email }}
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                         Campus :
                     </div>
                     <div class="col">
-                        Campus-ENI {# campus #}
+                        {{ campus.nom }}
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
 
         <div class="row">
             <div class="col text-center">
-                <button type="button" class="btn btn-secondary">Retour</button>
+                <a href="{{ path('app_sortie_index') }}" class="btn btn-secondary">Retour</a>
             </div>
         </div>
 
