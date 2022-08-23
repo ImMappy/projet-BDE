@@ -23,8 +23,8 @@ security:
                 target: app_home
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 6048000 #10 semaines
-                path:
+                lifetime: 604800 #10 semaines
+                always_remember_me: true
 
 
             # activate different ways to authenticate
