@@ -48,7 +48,7 @@ class EtatController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_etat_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'etat_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Etat $etat, EtatRepository $etatRepository): Response
     {
         $form = $this->createForm(EtatType::class, $etat);
