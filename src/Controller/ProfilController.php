@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfilController extends AbstractController
 {
-    #[Route('/profil/{id}', name: 'app_profil')] /* get $id from l'URL, and don't forget {id} in ROUTE */
+    #[Route('/profil/{id}', name: 'profil_index')] /* get $id from l'URL, and don't forget {id} in ROUTE */
     public function afficheProfil(CampusRepository $campus): Response
     {
         return $this->render('profil/profil.html.twig', [
@@ -23,7 +23,7 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/profil/modif/{id}', name: 'app_modif_profil')] /* get $id from l'URL, and don't forget {id} in ROUTE */
+    #[Route('/profil/modif/{id}', name: 'modif_profil')] /* get $id from l'URL, and don't forget {id} in ROUTE */
     public function modifProfil(Request $request, EntityManagerInterface $em): Response
     {
         $user = new User();
