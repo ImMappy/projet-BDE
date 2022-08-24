@@ -16,7 +16,7 @@ class EtatController extends AbstractController
     #[Route('/', name: 'app_etat_index', methods: ['GET'])]
     public function index(EtatRepository $etatRepository): Response
     {
-        return $this->render('etat/index.html.twig', [
+        return $this->render('pages/etat/index.html.twig', [
             'etats' => $etatRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class EtatController extends AbstractController
             return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('etat/new.html.twig', [
+        return $this->renderForm('pages/etat/new.html.twig', [
             'etat' => $etat,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class EtatController extends AbstractController
     #[Route('/{id}', name: 'app_etat_show', methods: ['GET'])]
     public function show(Etat $etat): Response
     {
-        return $this->render('etat/show.html.twig', [
+        return $this->render('pages/etat/show.html.twig', [
             'etat' => $etat,
         ]);
     }
@@ -60,7 +60,7 @@ class EtatController extends AbstractController
             return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('etat/edit.html.twig', [
+        return $this->renderForm('pages/etat/edit.html.twig', [
             'etat' => $etat,
             'form' => $form,
         ]);
