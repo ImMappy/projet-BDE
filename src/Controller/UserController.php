@@ -21,7 +21,7 @@ class UserController extends AbstractController
     #[Route('/', name: 'user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('pages/user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
@@ -53,7 +53,7 @@ class UserController extends AbstractController
             );
         }
 
-        return $this->render('user/register.html.twig', [
+        return $this->render('pages/user/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -70,7 +70,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/new.html.twig', [
+        return $this->renderForm('pages/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -79,7 +79,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('pages/user/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -103,7 +103,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->renderForm('pages/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
