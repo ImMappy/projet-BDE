@@ -1,4 +1,4 @@
-{% extends '../../base.html.twig' %}
+{% extends './base.html.twig' %}
 
 {% block title %}Sortie{% endblock %}
 
@@ -38,9 +38,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_sortie_index') }}">back to list</a>
+    <a href="{{ path('sortie_index') }}">back to list</a>
 
-    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>
+    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
 
-    {{ include('sortie/_delete_form.html.twig') }}
+    {{ include('pages/sortie/_delete_form.html.twig') }}
 {% endblock %}

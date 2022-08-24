@@ -1,13 +1,13 @@
-{% extends '../../base.html.twig' %}
+{% extends './base.html.twig' %}
 
 {% block title %}Edit Campus{% endblock %}
 
 {% block body %}
     <h1>Edit Campus</h1>
 
-    {{ include('campus/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('pages/campus/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_campus_index') }}">back to list</a>
+    <a href="{{ path('campus_index') }}">back to list</a>
 
-    {{ include('campus/_delete_form.html.twig') }}
+    {{ include('pages/campus/_delete_form.html.twig') }}
 {% endblock %}
