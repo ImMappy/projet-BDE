@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/etat')]
 class EtatController extends AbstractController
 {
-    #[Route('/', name: 'app_etat_index', methods: ['GET'])]
+    #[Route('/', name: 'etat_index', methods: ['GET'])]
     public function index(EtatRepository $etatRepository): Response
     {
         return $this->render('pages/etat/index.html.twig', [
@@ -21,7 +21,7 @@ class EtatController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_etat_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'etat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EtatRepository $etatRepository): Response
     {
         $etat = new Etat();
@@ -31,7 +31,7 @@ class EtatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $etatRepository->add($etat, true);
 
-            return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('etat_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pages/etat/new.html.twig', [
@@ -40,7 +40,7 @@ class EtatController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_etat_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'etat_show', methods: ['GET'])]
     public function show(Etat $etat): Response
     {
         return $this->render('pages/etat/show.html.twig', [
@@ -57,7 +57,7 @@ class EtatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $etatRepository->add($etat, true);
 
-            return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('etat_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pages/etat/edit.html.twig', [
@@ -66,13 +66,13 @@ class EtatController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_etat_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'etat_delete', methods: ['POST'])]
     public function delete(Request $request, Etat $etat, EtatRepository $etatRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$etat->getId(), $request->request->get('_token'))) {
             $etatRepository->remove($etat, true);
         }
 
-        return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('etat_index', [], Response::HTTP_SEE_OTHER);
     }
 }
