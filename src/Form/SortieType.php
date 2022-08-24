@@ -23,16 +23,21 @@ class SortieType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('dateHeureDebut')
+            ->add('dateHeureDebut',DateType::class,[
+                'input'=>'datetime_immutable',
+                'format' => 'dd-MM-yyyy'
+            ])
             ->add('duree',NumberType::class,[
                 'attr'=>[
                     'class'=>'form-control'
                 ],
-                'label' => 'Date Debut'
+                'label' => 'Durée',
+
             ])
             ->add('dateLimiteInscription',DateType::class,[
                 'input'  => 'datetime_immutable',
-                'label' => 'Date limite inscription'
+                'label' => 'Date limite inscription',
+                'format' => 'dd-MM-yyyy'
             ])
             ->add('nbInscriptionsMax',NumberType::class,[
                 'attr'=> [
