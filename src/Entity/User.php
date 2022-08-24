@@ -33,9 +33,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $pseudo = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
@@ -54,9 +51,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'organisateur', targetEntity: Sortie::class)]
     private Collection $sorties;
 
+    #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'user')]
+    private Collection $sortiesInscrit;
+
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campus $campus = null;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+        $this->sortiesInscrit = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,17 +134,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
 
     public function getNom(): ?string
     {
@@ -229,5 +223,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getSortiesInscrit(): Collection
+    {
+        return $this->sortiesInscrit;
+    }
+
+    public function addSortiesInscrit(Sortie $sortiesInscrit): self
+    {
+        if (!$this->sortiesInscrit->contains($sortiesInscrit)) {
+            $this->sortiesInscrit->add($sortiesInscrit);
+            $sortiesInscrit->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortiesInscrit(Sortie $sortiesInscrit): self
+    {
+        if ($this->sortiesInscrit->removeElement($sortiesInscrit)) {
+            $sortiesInscrit->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getCampus();
+        // TODO: Implement __toString() method.
     }
 }
