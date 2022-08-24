@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/sortie')]
 class SortieController extends AbstractController
 {
-    #[Route('/', name: 'app_sortie_index', methods: ['GET'])]
+    #[Route('/', name: 'sortie_index', methods: ['GET'])]
     public function index(SortieRepository $repository, PaginatorInterface $paginator,Request $request,CampusRepository $campusRepository): Response
     {
 
@@ -31,7 +31,7 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_sortie_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SortieRepository $sortieRepository): Response
     {
         $sortie = new Sortie();
@@ -49,7 +49,7 @@ class SortieController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{id}/edit', name: 'app_sortie_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'sortie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);

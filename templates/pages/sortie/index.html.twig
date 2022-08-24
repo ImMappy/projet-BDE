@@ -29,7 +29,7 @@
                 <td>{{ sortie.infosSortie }}</td>
                 <td>{{ sortie.etat }}</td>
                 <td>
-                    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>
+                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
                 </td>
             </tr>
 
@@ -44,5 +44,5 @@
         {{ knp_pagination_render(sorties) }}
     </div>
 
-    <a href="{{ path('app_sortie_new') }}">Create new</a>
+    <a href="{{ path('sortie_new') }}">Create new</a>
 {% endblock %}

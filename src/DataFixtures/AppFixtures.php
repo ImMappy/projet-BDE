@@ -24,6 +24,7 @@ class AppFixtures extends Fixture
                 $sortie[$i]->setDateLimiteInscription(new \DateTimeImmutable());
                 $sortie[$i]->setNbInscriptionsMax(mt_rand(3,15));
                 $sortie[$i]->setEtat("En cours");
+                $sortie[$i]->setOrganisateur($sortie[$i]->getOrganisateur());
                 $sortie[$i]->setInfosSortie($faker->text);
                 $manager->persist($sortie[$i]);
             }
