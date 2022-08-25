@@ -23,7 +23,8 @@ security:
                 target: app_login
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 604800 #10 semaines
+              #  secret: '%env(APP_SECRET)%'
+                lifetime: 604800 #1 week in seconds
                 always_remember_me: true
                 path: /
 
@@ -37,7 +38,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: ROLE_USER }
      #   - { path: ^/sortie/{id}/edit, roles: ROLE_ORGANISATEUR }
 
     role_hierarchy:
