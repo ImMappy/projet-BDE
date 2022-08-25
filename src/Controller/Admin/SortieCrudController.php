@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Sortie;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
