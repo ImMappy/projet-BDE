@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/sortie')]
 class SortieController extends AbstractController
 {
-    #[Route('/{id}', name: 'sortie_index', methods: ['GET'])]
+    #[Route('/', name: 'sortie_index', methods: ['GET'])]
     public function index(SortieRepository $sortieRepository,UserRepository $repository,User $user,Campus $campus): Response
     {
         return $this->render('pages/sortie/index.html.twig', [
