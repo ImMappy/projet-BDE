@@ -28,11 +28,6 @@ class UserType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('pseudo',TextType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
-                ]
-            ])
             ->add('nom',TextType::class,[
                 'attr'=>[
                     'class'=>'form-control'

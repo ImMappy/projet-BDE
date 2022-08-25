@@ -76,7 +76,7 @@ class RegistrationFormType extends AbstractType
                 'attr'=>[
                     'class'=>'btn btn-outline-success my-4 text-center md-'
                 ],
-                'label'=>'Envoyer'
+                'label'=>'Valider'
             ])
 
         ;
