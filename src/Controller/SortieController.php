@@ -20,9 +20,7 @@ class SortieController extends AbstractController
     public function index(SortieRepository $sortieRepository,UserRepository $repository,User $user,Campus $campus): Response
     {
         return $this->render('pages/sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findOneBy([
-                'id'=> $campus
-            ]),
+            'sorties' => $sortieRepository->findAll(),
             'user'=>$repository->find($user)
         ]);
     }
