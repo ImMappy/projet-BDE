@@ -3,9 +3,22 @@
 {% block title %}New Sortie{% endblock %}
 
 {% block body %}
-    <h1>Create new Sortie</h1>
+    <div class="container">
+        <div class="row text-center my-3">
+            <div class="col">
+                <h1>Nouvelle sortie</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ include('pages/sortie/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 
-    {{ include('pages/sortie/_form.html.twig') }}
+    <br>
 
-    <a href="{{ path('sortie_index') }}">back to list</a>
+    <div class="text-center">
+        <a href="{{ path('sortie_index') }}" class="text-decoration-none">back to list</a>
+    </div>
 {% endblock %}

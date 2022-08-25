@@ -3,11 +3,57 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+{#
+    <!--
+    <div class="container">
+        <div class="row text-center mt-3">
+            <div class="col">
+                <h1>Modifier profil</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(user.email) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(user.nom) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.prenom) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.telephone) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.Roles) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                 {{ form_row(form.isActif) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+
+    </div>
+    --> #}
 
     {{ include('pages/user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_index') }}" class="">back to list</a>
 
     {{ include('pages/user/_delete_form.html.twig') }}
+
 {% endblock %}
