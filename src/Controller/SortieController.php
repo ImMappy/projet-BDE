@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Sortie;
+use App\Entity\User;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/sortie')]
 class SortieController extends AbstractController
 {
-    #[Route('/', name: 'sortie_index', methods: ['GET'])]
-    public function index(SortieRepository $sortieRepository): Response
+    #[Route('/{id}', name: 'sortie_index', methods: ['GET'])]
+    public function index(SortieRepository $sortieRepository,UserRepository $repository,User $user,Campus $campus): Response
     {
         return $this->render('pages/sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),
+            'sorties' => $sortieRepository->findOneBy([
+                'id'=> $campus
+            ]),
+            'user'=>$repository->find($user)
         ]);
     }
 
@@ -37,6 +43,7 @@ class SortieController extends AbstractController
         return $this->renderForm('pages/sortie/new.html.twig', [
             'sortie' => $sortie,
             'form' => $form,
+
         ]);
     }
 
