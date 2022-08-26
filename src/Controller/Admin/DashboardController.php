@@ -69,7 +69,11 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Ajouter une ville','fas fa-plus',Ville::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Toutes les villes','fas fa-eye',Ville::class)
         ]);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::subMenu('Étudiants','fa-solid fa-graduation-cap')->setSubItems([
+            MenuItem::linkToCrud('Ajouter un étudiant','fas fa-plus',User::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Tous les étudiants','fas fa-eye',User::class)
+        ]);
+            yield MenuItem::linkToRoute('Partie utilisateur','fa-solid fa-users','sortie_index');
 
     }
 }
