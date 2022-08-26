@@ -3,47 +3,54 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <div class="container text-center">
+        <div class="row my-3">
+            <h1>User index</h1>
+        </div>
+        <div class="row">
+            <div class="col align-items-start">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Telephone</th>
+                        <th>Administrateur</th>
+                        <th>Actif</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.password }}</td>
+                            <td>{{ user.nom }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.telephone }}</td>
+                            <td>{{ user.isAdministrateur ? 'Yes' : 'No' }}</td>
+                            <td>{{ user.isActif ? 'Yes' : 'No' }}</td>
+                            <td>
+                                <a href="{{ path('user_show', {'id': user.id}) }}" class="text-decoration-none">show</a>
+                                <a href="{{ path('user_edit', {'id': user.id}) }}" class="text-decoration-none">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="11">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mb-5 mt-2">
+                <div class="col text-center">
+                    <a href="{{ path('user_register') }}" class="btn btn-outline-secondary">Create new</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Telephone</th>
-                <th>IsAdministrateur</th>
-                <th>IsActif</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.telephone }}</td>
-                <td>{{ user.isAdministrateur ? 'Yes' : 'No' }}</td>
-                <td>{{ user.isActif ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_register') }}">Create new</a>
 {% endblock %}

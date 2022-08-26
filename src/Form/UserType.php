@@ -8,6 +8,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -54,6 +55,13 @@ class UserType extends AbstractType
             ])
            ->add('isAdministrateur')
             ->add('isActif')
+            ->add('submit',SubmitType::class,[
+                'attr'=>[
+                    'class'=>'btn btn-outline-success my-4 text-center md-'
+                ],
+                'label'=>'Valider'
+            ])
+
         ;
         $builder->get('Roles')
             ->addModelTransformer(new CallbackTransformer(
@@ -74,4 +82,6 @@ class UserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
+
+
 }
