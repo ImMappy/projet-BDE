@@ -3,6 +3,7 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
+    {% if app.user %}
     <h1 class="text-center my-4">Sortie index</h1>
     <div class="d-flex justify-content-end me-5 mb-5">
         <div class="card" style="width: 18rem;">
@@ -12,6 +13,7 @@
                 <h6 class="card-subtitle mb-3">Nom: {{ app.user.nom }}</h6>
                 <h6 class="card-subtitle mb-3">Prénom: {{ app.user.prenom }}</h6>
                 <h6 class="card-subtitle mb-3">Campus: {{ app.user.campus }}</h6>
+
                 <a href="{{ path('user_show',{id:app.user.id}) }}" class="card-link">Voir plus</a>
             </div>
         </div>
@@ -52,4 +54,5 @@
     </table>
 
     <a href="{{ path('sortie_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

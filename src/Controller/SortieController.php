@@ -9,7 +9,6 @@ use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     #[Route('/', name: 'sortie_index', methods: ['GET'])]
-    public function index(SortieRepository $sortieRepository,UserRepository $repository ): Response
+    public function index(SortieRepository $sortieRepository): Response
     {
         return $this->render('pages/sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll(),
