@@ -9,6 +9,9 @@
                 <h1>{{ user.prenom }} {{ user.nom }}</h1>
             </div>
         </div>
+        <div>
+            <img src="{{ asset('uploads/images/' ~ user.image) }}" width="50" alt="{{ user.image }}">
+        </div>
         <div class="row">
             <div class="col">
                 <table class="table">
