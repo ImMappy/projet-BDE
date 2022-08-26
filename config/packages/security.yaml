@@ -39,12 +39,12 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
       #  - { path: ^/, roles: ROLE_USER }
-     #   - { path: ^/sortie/{id}/edit, roles: ROLE_ORGANISATEUR }
+      # - { path: ^/sortie/{id}/edit, roles: ROLE_ORGANISATEUR }
+
 
     role_hierarchy:
-            ROLE_ADMIN: ROLE_USER
-            # ROLE_ORGANISATEUR: ROLE_USER
-            ROLE_PARTICIPANT: ROLE_USER
+            ROLE_ADMIN: [ROLE_USER, ROLE_ORGANISATEUR]
+            ROLE_ORGANISATEUR: ROLE_USER
 
 when@test:
     security:
