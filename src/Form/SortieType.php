@@ -23,40 +23,57 @@ class SortieType extends AbstractType
         $builder
             ->add('nom',TextType::class,[
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'form-control mb-3'
                 ]
             ])
-            ->add('dateHeureDebut',DateType::class)
+            ->add('dateHeureDebut',DateType::class,[
+                'attr'=>[
+                    'class'=>'mb-3'
+                ]
+            ])
             ->add('duree',NumberType::class,[
                 'attr'=> [
-                    'class'=>'form-control'
+                    'class'=>'form-control mb-3'
                 ],
                 'label'=>'Date début sortie'
             ])
-            ->add('dateLimiteInscription',DateType::class)
+            ->add('dateLimiteInscription',DateType::class,[
+                'attr'=>[
+                    'class'=>'mb-3'
+                ]
+            ])
             ->add('nbInscriptionsMax',NumberType::class,[
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'form-control mb-3'
                 ],
-                'label'=>"Date limite d'inscription"
+                'label'=>"Nombre d'inscritpion maximum"
             ])
             ->add('infosSortie',TextareaType::class,[
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'form-control mb-3'
                 ],
                 'label'=>'Informations'
             ])
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
-                'label'=>'Campus'
+                'label'=>'Campus',
+                'attr'=>[
+                    'class'=>'mb-3'
+                ],
             ])
             ->add('etat',EntityType::class,[
                 'class'=>Etat::class,
-                'label'=>'Etat'
+                'label'=>'Etat',
+                'attr'=>[
+                    'class'=>'mb-3'
+                ],
             ])
             ->add('lieu',EntityType::class,[
                 'class'=>Lieu::class,
-                'label'=>'Lieu'
+                'label'=>'Lieu',
+                'attr'=>[
+                    'class'=>'mb-3'
+                ],
             ])
         ;
     }
