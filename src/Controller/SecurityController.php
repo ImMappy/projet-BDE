@@ -49,10 +49,10 @@ class SecurityController extends AbstractController
             'target_path' => $this->generateUrl('admin'),
 
             // the label displayed for the username form field (the |trans filter is applied to it)
-            'username_label' => 'Your email',
+            'username_label' => 'Votre email',
 
             // the label displayed for the password form field (the |trans filter is applied to it)
-            'password_label' => 'Your password',
+            'password_label' => 'Mot de passe',
 
             // the label displayed for the Sign In form button (the |trans filter is applied to it)
             'sign_in_label' => 'Se connecter',
@@ -85,6 +85,7 @@ class SecurityController extends AbstractController
             'remember_me_label' => 'Remember me',
         ]);
     }
+
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
