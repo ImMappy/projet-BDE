@@ -52,7 +52,7 @@ class UserType extends AbstractType
                     'Admin' => 'ROLE_ADMIN',
                 ],
             ])
-//            ->add('isAdministrateur')
+           ->add('isAdministrateur')
             ->add('isActif')
         ;
         $builder->get('Roles')

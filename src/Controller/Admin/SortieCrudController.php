@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use function Sodium\add;
 
 class SortieCrudController extends AbstractCrudController
@@ -42,11 +43,12 @@ class SortieCrudController extends AbstractCrudController
             DateTimeField::new('dateLimiteInscription'),
             NumberField::new('nbInscriptionsMax',"Nombre d'inscrits maximum"),
             AssociationField::new('campus'),
-            AssociationField::new('organisateur'),
+            AssociationField::new('user'),
             AssociationField::new('lieu'),
             TextEditorField::new('infosSortie'),
 
         ];
     }
+
 
 }

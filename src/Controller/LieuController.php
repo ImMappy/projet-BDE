@@ -6,6 +6,7 @@ use App\Entity\Lieu;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +44,7 @@ class LieuController extends AbstractController
     #[Route('/{id}', name: 'lieu_show', methods: ['GET'])]
     public function show(Lieu $lieu): Response
     {
+
         return $this->render('pages/lieu/show.html.twig', [
             'lieu' => $lieu,
         ]);
@@ -74,5 +76,21 @@ class LieuController extends AbstractController
         }
 
         return $this->redirectToRoute('lieu_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/api/{id}', name: 'lieu_api')]
+    public function getApi(Lieu $lieu, LieuRepository $lieuRepository): Response
+    {
+        $lieuAll = $lieuRepository->findAll();
+        foreach ( $lieuAll as $el ){
+
+            $lieuId = [
+                'id' => $el->getId(),
+                'nom' => $el->getNom(),
+                'latitude' => $el->getLatitude(),
+                'longitude'=>$el->getLongitude()
+            ];
+        }
+
+        return new JsonResponse($lieuId);
     }
 }
