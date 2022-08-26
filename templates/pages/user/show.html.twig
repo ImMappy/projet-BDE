@@ -40,12 +40,12 @@
                 </table>
             </div>
         </div>
-        <div class="row mb-5 mt-2">
-            <div class="col text-end">
-                <a href="{{ path('user_index') }}"  class="btn btn-outline-secondary">Revenir a l'accueil</a>
+        <div class="row mb-5 mt-3">
+            <div class="col text-end mx-4">
+                <a href="{{ path('sortie_index') }}"  class="btn btn-outline-primary">Revenir a l'accueil</a>
             </div>
-            <div class="col text-start">
-                {{ include('pages/user/_delete_form.html.twig') }}
+            <div class="col text-start mx-4">
+                <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-outline-primary text-decoration-none">Modifier</a>
             </div>
         </div>
     </div>

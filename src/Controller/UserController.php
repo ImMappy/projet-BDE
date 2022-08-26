@@ -27,6 +27,10 @@ class UserController extends AbstractController
         ]);
     }
 
+
+
+
+
     #[Route('/register', name: 'user_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
@@ -59,6 +63,11 @@ class UserController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+
+
+
+
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
