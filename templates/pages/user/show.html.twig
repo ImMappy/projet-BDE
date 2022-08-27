@@ -3,6 +3,7 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
+    {% if app.user %}
     <div class="container">
         <div class="row text-center">
             <div class="col my-3">
@@ -49,6 +50,11 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if not app.user %}
+        <h2>Merci de vous connecter</h2>
+
+    {% endif %}
 
 
 
