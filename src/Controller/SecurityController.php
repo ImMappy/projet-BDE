@@ -67,7 +67,7 @@ class SecurityController extends AbstractController
             'forgot_password_enabled' => true,
 
             // the path (i.e. a relative or absolute URL) to visit when clicking the "forgot password?" link (default: '#')
-//            'forgot_password_path' => $this->generateUrl('...', ['...' => '...']),
+          'forgot_password_path' => $this->generateUrl('reset_password'),
 
             // the label displayed for the "forgot password?" link (the |trans filter is applied to it)
             'forgot_password_label' => 'Forgot your password?',
