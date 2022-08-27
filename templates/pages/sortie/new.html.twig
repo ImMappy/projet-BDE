@@ -3,6 +3,7 @@
 {% block title %}New Sortie{% endblock %}
 
 {% block body %}
+
     <div class="container">
         <div class="row text-center my-3">
             <div class="col">
@@ -11,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col">
-                {{ include('pages/sortie/_form.html.twig') }}
+                    {{ form(form) }}
             </div>
         </div>
     </div>
