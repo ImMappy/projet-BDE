@@ -25,14 +25,16 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'sortie_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SortieRepository $sortieRepository): Response
+    #[Route('/new/{id}', name: 'sortie_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, SortieRepository $sortieRepository,UserRepository $repository, $id): Response
     {
         $sortie = new Sortie();
+        $user = $repository->find($id);
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sortie->setOrganisateur($user);
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
