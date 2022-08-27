@@ -9,6 +9,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
+                {% if app.user %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ path('sortie_index') }}">Accueil
                         <span class="visually-hidden">(current)</span>
@@ -23,9 +24,9 @@
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_index')}}">Mon profil</a>
+                    <a class="nav-link" href="{{ path('user_show',{id:app.user.id})}}">Mon profil</a>
                 </li>
-                {% if app.user %}
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                 </li>
