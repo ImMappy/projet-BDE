@@ -53,6 +53,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('sortie_new') }}">Create new</a>
+    <a href="{{ path('sortie_new',{'id':app.user.id}) }}">Create new</a>
     {% endif %}
 {% endblock %}
