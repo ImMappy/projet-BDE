@@ -9,15 +9,21 @@ use App\Entity\Sortie;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
+
 class SortieType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -26,21 +32,25 @@ class SortieType extends AbstractType
                     'class'=>'form-control mb-3'
                 ]
             ])
-            ->add('dateHeureDebut',DateType::class,[
+            ->add('dateHeureDebut',DateTimeType::class,[
+                'input'=>'datetime_immutable',
                 'attr'=>[
                     'class'=>'mb-3'
-                ]
+                ],
+                'label' => 'Date début sortie'
             ])
             ->add('duree',NumberType::class,[
                 'attr'=> [
                     'class'=>'form-control mb-3'
                 ],
-                'label'=>'Date début sortie'
+                'label'=>'Durée'
             ])
-            ->add('dateLimiteInscription',DateType::class,[
+            ->add('dateLimiteInscription',DateTimeType::class,[
+                'input'=>'datetime_immutable',
                 'attr'=>[
                     'class'=>'mb-3'
-                ]
+                ],
+                'label'=> 'Date limite inscription'
             ])
             ->add('nbInscriptionsMax',NumberType::class,[
                 'attr'=>[
@@ -74,6 +84,9 @@ class SortieType extends AbstractType
                 'attr'=>[
                     'class'=>'mb-3'
                 ],
+            ])
+            ->add('submit',SubmitType::class,[
+                'label'=> 'Envoyer'
             ])
         ;
     }
