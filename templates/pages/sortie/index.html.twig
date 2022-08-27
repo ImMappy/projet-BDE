@@ -26,8 +26,9 @@
                 <th scope="col">Date</th>
                 <th scope="col">Duree</th>
                 <th scope="col">Date limite inscriptions</th>
-                <th scope="col">Inscrits</th>
+{#                <th scope="col">Inscrits</th>#}
                 <th scope="col">Informations</th>
+                <th scope="col">Organisateur</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -38,10 +39,12 @@
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sortie.duree }}</td>
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sortie.nbInscriptionsMax }}</td>
+{#                <td>{{ sortie.nbInscriptionsMax }}</td>#}
                 <td>{{ sortie.infosSortie }}</td>
+                <td>{{ sortie.organisateur.getFullName }}</td>
                 <td>
                     <a href="{{ path('sortie_show', {'id': sortie.id}) }}">show</a>
+                    <a href="{{ path('sortie_register_user', {'id': sortie.id}) }}">show</a>
                     <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
                 </td>
             </tr>
