@@ -3,6 +3,7 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
+    {% if app.user %}
     <div class="container text-center">
         <div class="row my-3">
             <h1>User index</h1>
@@ -52,5 +53,9 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if not app.user %}
+        <h2>Merci de vous connecter</h2>
+    {% endif %}
 
 {% endblock %}
