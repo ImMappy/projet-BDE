@@ -300,6 +300,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getCampus();
         // TODO: Implement __toString() method.
     }
+    public function getFullName():string
+    {
+        return $this->prenom . " ".  $this->nom;
+    }
 
 
 }
