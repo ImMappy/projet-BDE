@@ -77,7 +77,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -90,6 +90,7 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $userRepository->add($user, true);
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
