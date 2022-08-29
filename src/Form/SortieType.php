@@ -85,26 +85,9 @@ class SortieType extends AbstractType
                     'class'=>'mb-3'
                 ],
             ])
+            //envoyer le form (autres boutons dans twig)
             ->add('submit',SubmitType::class,[
-                'label'=> 'Enregistrer',
-                'attr'=>[
-                    'class'=>'mb-3 mx-auto'
-                ]
-            ])
-            ->add('submit2',SubmitType::class,[
                 'label'=> 'Publier la sortie',
-                'attr'=>[
-                    'class'=>'mb-3 mx-auto'
-                ]
-            ])
-            ->add('submit3',SubmitType::class,[
-                'label'=> 'Supprimer la sortie',
-                'attr'=>[
-                    'class'=>'mb-3 mx-auto'
-                ]
-            ])
-            ->add('submit4',SubmitType::class,[
-                'label'=> 'Annuler',
                 'attr'=>[
                     'class'=>'mb-3 mx-auto'
                 ]
