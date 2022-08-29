@@ -67,7 +67,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);  // permet d'affecter le user (organisateur) à sa sortie
             $sortieRepository->add($sortie, true);
-        //    $etat->setLibelle('Créee');
+            $etat->setLibelle('Créee');
 
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -79,20 +79,26 @@ class SortieController extends AbstractController
     }
 
     #[Route('/{id}', name: 'sortie_delete', methods: ['POST'])]
-    public function delete(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository, $repository): Response
+    public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
-      //  $date = $repository->find($dateDebut);
-
         if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
-        /*    if($this->){
-                $etat->setLibelle('Annulée');
-            } else {
-                $etat->setLibelle('Cloturée');
-            }*/
         }
 
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /*
+    public function inscrire(User $user, Sortie $sortie, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
+    {
+        $user = $repository->find($id);
+        $sortie = $sortieRepository->find($id);
+
+        return $this->render('pages/sortie/show.html.twig', [
+            'sortie' => $sortie,
+            'user' => $user,
+        ]);
+    }
+    */
 
 }

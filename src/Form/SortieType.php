@@ -86,9 +86,27 @@ class SortieType extends AbstractType
                 ],
             ])
             ->add('submit',SubmitType::class,[
-                'label'=> 'Envoyer',
+                'label'=> 'Enregistrer',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'mb-3 mx-auto'
+                ]
+            ])
+            ->add('submit2',SubmitType::class,[
+                'label'=> 'Publier la sortie',
+                'attr'=>[
+                    'class'=>'mb-3 mx-auto'
+                ]
+            ])
+            ->add('submit3',SubmitType::class,[
+                'label'=> 'Supprimer la sortie',
+                'attr'=>[
+                    'class'=>'mb-3 mx-auto'
+                ]
+            ])
+            ->add('submit4',SubmitType::class,[
+                'label'=> 'Annuler',
+                'attr'=>[
+                    'class'=>'mb-3 mx-auto'
                 ]
             ])
         ;
