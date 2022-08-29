@@ -86,7 +86,10 @@ class SortieType extends AbstractType
                 ],
             ])
             ->add('submit',SubmitType::class,[
-                'label'=> 'Envoyer'
+                'label'=> 'Envoyer',
+                'attr'=>[
+                    'class'=>'mb-3'
+                ]
             ])
         ;
     }
