@@ -13,8 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use function Sodium\add;
+
 
 class SortieCrudController extends AbstractCrudController
 {
@@ -22,7 +21,7 @@ class SortieCrudController extends AbstractCrudController
     {
         return Sortie::class;
     }
-    public function createEntity(string $entityFqcn)
+    public function createEntity(string $entityFqcn,)
     {
         $user = new Sortie();
         $user->setOrganisateur($this->getUser());
@@ -46,6 +45,7 @@ class SortieCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $user = new Sortie();
          return [
             IdField::new('id')->hideOnForm()->hideOnIndex()->hideOnDetail(),
             TextField::new('nom'),
