@@ -212,4 +212,6 @@ class Sortie
         return $this->getOrganisateur();
     }
 
+
+
 }

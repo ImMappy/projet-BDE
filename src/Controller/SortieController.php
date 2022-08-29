@@ -29,10 +29,14 @@ class SortieController extends AbstractController
     #[Route('/new/{id}', name: 'sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SortieRepository $sortieRepository,UserRepository $repository, $id): Response
     {
+
         $sortie = new Sortie();
         $user = $repository->find($id);
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
+
+        // add organisateur to list of participants
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);

@@ -53,7 +53,7 @@ class SortieCrudController extends AbstractCrudController
             NumberField::new('duree'),
             DateTimeField::new('dateLimiteInscription'),
             NumberField::new('nbInscriptionsMax',"Nombre d'inscrits maximum"),
-            AssociationField::new('campus'),
+             AssociationField::new('campus'),
              AssociationField::new('etat'),
             AssociationField::new('lieu'),
             TextEditorField::new('infosSortie'),
