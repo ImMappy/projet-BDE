@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Form\SortieType;
@@ -36,7 +37,6 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);
             $sortieRepository->add($sortie, true);
-
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -50,8 +50,10 @@ class SortieController extends AbstractController
     #[Route('/{id}', name: 'sortie_show', methods: ['GET'])]
     public function show(Sortie $sortie): Response
     {
+        $userCollection = $sortie->getUser();
         return $this->render('pages/sortie/show.html.twig', [
             'sortie' => $sortie,
+            'userCollection'=>$userCollection
         ]);
     }
 

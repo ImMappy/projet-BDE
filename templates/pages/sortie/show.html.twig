@@ -37,18 +37,13 @@
             </tr>
         </tbody>
     </table>
-{#    <ul>#}
-{#        {% if collection is same as [] %}#}
-{#            <h2>Aucun inscrit</h2>#}
-{#        {% endif %}#}
-{#        {% if not collection is same as [] %}#}
-{#            {% for element in collection %}#}
-{#                <li>{{ element }}</li>#}
-{#            {% endfor %}#}
-{#        {% endif %}#}
+    <ul>
+        <li>test</li>
+            {% for element in userCollection %}
+                <li>{{ element.getFullName }}</li>
+            {% endfor %}
 
-
-{#    </ul>#}
+    </ul>
 
 
     <a href="{{ path('sortie_index') }}">back to list</a>
