@@ -78,14 +78,19 @@ class SortieType extends AbstractType
                     'class'=>'mb-3'
                 ],
             ])
-
+            ->add('lieu',EntityType::class,[
+                'class'=>Lieu::class,
+                'label'=>'Lieu',
+                'attr'=>[
+                    'class'=>'mb-3'
+                ],
+            ])
             ->add('submit',SubmitType::class,[
                 'label'=> 'Envoyer',
                 'attr'=>[
                     'class'=>'mb-3'
                 ]
             ])
-
         ;
     }
 
