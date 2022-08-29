@@ -62,13 +62,16 @@ class SortieController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'sortie_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
+    public function edit(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
+        $user = $repository->find($id); // recupération de l'id user
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sortie->setOrganisateur($user);  // permet d'affecter le user (organisateur) à sa sortie
             $sortieRepository->add($sortie, true);
+        //    $etat->setLibelle('Créee');
 
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,10 +83,17 @@ class SortieController extends AbstractController
     }
 
     #[Route('/{id}', name: 'sortie_delete', methods: ['POST'])]
-    public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
+    public function delete(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository, $repository): Response
     {
+      //  $date = $repository->find($dateDebut);
+
         if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
+        /*    if($this->){
+                $etat->setLibelle('Annulée');
+            } else {
+                $etat->setLibelle('Cloturée');
+            }*/
         }
 
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
