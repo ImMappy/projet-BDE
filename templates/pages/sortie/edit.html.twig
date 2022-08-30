@@ -9,9 +9,13 @@
 
     {{ form(form) }} {# appelle 'form' dans render form de l'edit du UserController #}
 
-        <a href="{{ path('sortie_index') }}">back to list</a>
+    <button> Enregistrer </button>
+
+    <button> Annuler la sortie </button>
 
         {{ include('pages/sortie/_delete_form.html.twig') }}
+
+    <a href="{{ path('sortie_index') }}">Revenir à l'accueil</a>
 {#    {% endif %}#}
 
 {% endblock %}
