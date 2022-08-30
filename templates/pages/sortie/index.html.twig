@@ -43,13 +43,14 @@
                             <li class="list-group-item">Organisateur: {{ sortie.organisateur.getFullName }}</li>
                         </ul>
                         <div class="card-body text-center">
-                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="text-decoration-none align-middle">Détail</a>
-                            <a>-</a>
-                           <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="text-decoration-none align-middle">S'inscrire</a>
+                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
+                                {% if app.user.id != sortie.organisateur.id %}
+                                    <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
+                                    <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Se désister</a>
+                                {% endif %}
                             {% if app.user.id == sortie.organisateur.id %}
-                            <a>-</a>
-                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="text-decoration-none align-middle">Modifier</a>
-                            {% endif %}
+                                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
+                                {% endif %}
                         </div>
                     </div>
                 </div>
