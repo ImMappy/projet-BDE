@@ -3,52 +3,53 @@
 {% block title %}Sortie{% endblock %}
 
 {% block body %}
-    <h1>Sortie</h1>
+    <div class="container-fluid">
+        <h1 class="text-center my-4">Détail de la sortie</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ sortie.nom }}</td>
-            </tr>
-            <tr>
-                <th>DateHeureDebut</th>
-                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ sortie.duree }}</td>
-            </tr>
-            <tr>
-                <th>DateLimiteInscription</th>
-                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NbInscriptionsMax</th>
-                <td>{{ sortie.nbInscriptionsMax }}</td>
-            </tr>
-            <tr>
-                <th>InfosSortie</th>
-                <td>{{ sortie.infosSortie }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <ul>
-        <li>test</li>
-            {% for element in userCollection %}
-                <li>{{ element.getFullName }}</li>
-            {% endfor %}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ sortie.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Date et heure de début</th>
+                    <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Duree</th>
+                    <td>{{ sortie.duree }}</td>
+                </tr>
+                <tr>
+                    <th>Date limite d'inscription</th>
+                    <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre de places</th>
+                    <td>{{ sortie.nbInscriptionsMax }}</td>
+                </tr>
+                <tr>
+                    <th>Information complémentaire</th>
+                    <td>{{ sortie.infosSortie }}</td>
+                </tr>
+                <tr>
+                    <th>Participants</th>
+                    <td>{% for element in userCollection %}
+                            <li>{{ element.getFullName }}</li>
+                        {% endfor %}</td>
+                </tr>
 
-    </ul>
+            </tbody>
+        </table>
+
+        <div class="my-5 d-flex justify-content-center">
+            <a href="{{ path('sortie_index') }}" class="btn btn-outline-secondary mx-3">Liste des sorties</a>
+            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
+            <div class="mx-3">
+                {{ include('pages/sortie/_delete_form.html.twig') }}
+            </div>
+        </div>
 
 
-    <a href="{{ path('sortie_index') }}">back to list</a>
-
-    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
-
-    {{ include('pages/sortie/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

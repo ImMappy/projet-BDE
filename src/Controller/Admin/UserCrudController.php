@@ -13,9 +13,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -42,6 +48,16 @@ class UserCrudController extends AbstractCrudController
         return $crud->setPageTitle('new','Ajouter un étuidiant')
             ->setPageTitle('edit','Modifier étudiant')
             ->setPageTitle('index','Tous les étudiants');
+    }
+
+    protected function addEncodePasswordEventListener( FormBuilderInterface $formBuilder, $plainPassword = null ): void {
+        $formBuilder->addEventListener( FormEvents::SUBMIT, function ( FormEvent $event ) use ( $plainPassword ) {
+            /** @var User $user */
+            $user = $event->getData();
+            if ( $user->getPassword() !== $plainPassword ) {
+                $user->setPassword( $this->passwordEncoder->hashPassword( $user, $user->getPassword() ) );
+            }
+        } );
     }
 
 }

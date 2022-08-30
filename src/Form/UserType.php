@@ -53,7 +53,7 @@ class UserType extends AbstractType
                     'Admin' => 'ROLE_ADMIN',
                 ],
             ])
-           ->add('isAdministrateur')
+            ->add('isAdministrateur')
             ->add('isActif')
             ->add('submit',SubmitType::class,[
                 'attr'=>[

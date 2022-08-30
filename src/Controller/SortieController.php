@@ -29,10 +29,14 @@ class SortieController extends AbstractController
     #[Route('/new/{id}', name: 'sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SortieRepository $sortieRepository,UserRepository $repository, $id): Response
     {
+
         $sortie = new Sortie();
         $user = $repository->find($id);
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
+
+        // add organisateur to list of participants
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);
@@ -58,13 +62,16 @@ class SortieController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'sortie_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
+    public function edit(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
+        $user = $repository->find($id); // recupération de l'id user
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sortie->setOrganisateur($user);  // permet d'affecter le user (organisateur) à sa sortie
             $sortieRepository->add($sortie, true);
+            $etat->setLibelle('Créee');
 
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -84,5 +91,18 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /*
+    public function inscrire(User $user, Sortie $sortie, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
+    {
+        $user = $repository->find($id);
+        $sortie = $sortieRepository->find($id);
+
+        return $this->render('pages/sortie/show.html.twig', [
+            'sortie' => $sortie,
+            'user' => $user,
+        ]);
+    }
+    */
 
 }
