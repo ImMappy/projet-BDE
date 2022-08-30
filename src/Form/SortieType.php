@@ -86,7 +86,7 @@ class SortieType extends AbstractType
                 ],
             ])
             ->add('submit',SubmitType::class,[
-                'label'=> 'Envoyer',
+                'label'=> 'Publier la sortie',
                 'attr'=>[
                     'class'=>'mb-3'
                 ]
