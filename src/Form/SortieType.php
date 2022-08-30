@@ -56,13 +56,15 @@ class SortieType extends AbstractType
                 'attr'=>[
                     'class'=>'form-control mb-3'
                 ],
-                'label'=>"Nombre d'inscritpion maximum"
+                'label'=>"Nombre d'inscriptions maximum"
             ])
             ->add('infosSortie',TextareaType::class,[
                 'attr'=>[
-                    'class'=>'form-control mb-3'
+                    'class'=>'form-control mb-3',
+                    'style'=>'resize:none;'
                 ],
-                'label'=>'Informations'
+                'label'=>'Informations',
+
             ])
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
@@ -86,7 +88,7 @@ class SortieType extends AbstractType
                 ],
             ])
             ->add('submit',SubmitType::class,[
-                'label'=> 'Envoyer',
+                'label'=> 'Publier la sortie',
                 'attr'=>[
                     'class'=>'mb-3'
                 ]

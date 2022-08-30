@@ -27,9 +27,9 @@ class SortieController extends AbstractController
     }
 
     #[Route('/new/{id}', name: 'sortie_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SortieRepository $sortieRepository,UserRepository $repository, $id): Response
+    public function new(Request $request, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
-
+        $etat = new Etat();
         $sortie = new Sortie();
         $user = $repository->find($id);
         $form = $this->createForm(SortieType::class, $sortie);
@@ -41,6 +41,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);
             $sortieRepository->add($sortie, true);
+            $etat->setLibelle('Créee');
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -57,12 +58,12 @@ class SortieController extends AbstractController
         $userCollection = $sortie->getUser();
         return $this->render('pages/sortie/show.html.twig', [
             'sortie' => $sortie,
-            'userCollection'=>$userCollection
+            'userCollection' => $userCollection
         ]);
     }
 
     #[Route('/{id}/edit', name: 'sortie_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
+    public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
         $user = $repository->find($id); // recupération de l'id user
         $form = $this->createForm(SortieType::class, $sortie);
@@ -71,7 +72,6 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);  // permet d'affecter le user (organisateur) à sa sortie
             $sortieRepository->add($sortie, true);
-            $etat->setLibelle('Créee');
 
             return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -85,7 +85,7 @@ class SortieController extends AbstractController
     #[Route('/{id}', name: 'sortie_delete', methods: ['POST'])]
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
         }
 
@@ -93,16 +93,25 @@ class SortieController extends AbstractController
     }
 
     /*
-    public function inscrire(User $user, Sortie $sortie, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
+    #[Route('/{id}', name: 'sortie_cancel', methods: ['POST'])]
+    public function cancel(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository): Response
     {
-        $user = $repository->find($id);
-        $sortie = $sortieRepository->find($id);
+        $form = $this->createForm(SortieType::class, $sortie);
+        $form->handleRequest($request);
 
-        return $this->render('pages/sortie/show.html.twig', [
-            'sortie' => $sortie,
-            'user' => $user,
-        ]);
-    }
-    */
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->isCsrfTokenValid('cancel' . $sortie->getId(), $request->request->get('_token'))) {
+                $sortieRepository->remove($sortie, true);
+                $etat->setLibelle('Sortie annulée');
+            }
+            return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+        }
+            return $this->renderForm('pages/sortie/cancel.html.twig', [
+                'sortie' => $sortie,
+                'form' => $form,
+            ]);
+        }
+
+*/
 
 }
