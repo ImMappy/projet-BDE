@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -53,6 +54,12 @@ class UserType extends AbstractType
                     'Admin' => 'ROLE_ADMIN',
                 ],
             ])
+            ->add('image', FileType::class,[
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false
+            ])
             ->add('isAdministrateur')
             ->add('isActif')
             ->add('submit',SubmitType::class,[
@@ -60,9 +67,7 @@ class UserType extends AbstractType
                     'class'=>'btn btn-outline-success my-4 text-center md-'
                 ],
                 'label'=>'Valider'
-            ])
-
-        ;
+            ]);
         $builder->get('Roles')
             ->addModelTransformer(new CallbackTransformer(
                 function ($rolesArray) {
