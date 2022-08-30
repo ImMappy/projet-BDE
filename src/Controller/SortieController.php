@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Campus;
+
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\User;
@@ -19,6 +19,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/sortie')]
 class SortieController extends AbstractController
 {
+    /**
+     * @param SortieRepository $sortieRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'sortie_index', methods: ['GET'])]
     public function index(SortieRepository $sortieRepository,PaginatorInterface $paginator,Request $request): Response
     {
@@ -34,6 +40,13 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param SortieRepository $sortieRepository
+     * @param UserRepository $repository
+     * @param $id
+     * @return Response
+     */
     #[Route('/new/{id}', name: 'sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
@@ -60,6 +73,10 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Sortie $sortie
+     * @return Response
+     */
     #[Route('/{id}', name: 'sortie_show', methods: ['GET'])]
     public function show(Sortie $sortie): Response
     {
@@ -70,6 +87,14 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Sortie $sortie
+     * @param SortieRepository $sortieRepository
+     * @param UserRepository $repository
+     * @param $id
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'sortie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
@@ -90,6 +115,12 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Sortie $sortie
+     * @param SortieRepository $sortieRepository
+     * @return Response
+     */
     #[Route('/{id}', name: 'sortie_delete', methods: ['POST'])]
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
@@ -100,6 +131,12 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * @param Sortie $sortie
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]  //appelle sortie qyi recupère l'id de la sortie
     public function registertoSortie(Sortie $sortie, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -108,7 +145,7 @@ class SortieController extends AbstractController
         $entityManager->persist($sortie); //on passe en paramètre l'entity emanager, qui gère les entités // persist prépare l'envoi de la donnée
         $entityManager->flush(); //envoi des données dans la dbb
 
-        return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('sortie_show', [], Response::HTTP_SEE_OTHER);
     }
 
     /*
