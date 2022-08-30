@@ -137,44 +137,47 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     * Inscrire un User a une Sortie
-     * @param Sortie $sortie
-     * @param User $user
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]  //appelle sortie qyi recupère l'id de la sortie
-    public function registertoSortie(Sortie $sortie,User $user, EntityManagerInterface $entityManager): Response
-    {
-        $sortie->addUser($this->getUser()); //addUser appelle la méthode située dans sortie entité et qui ajoute l'utilisateur dans une sortie // on attend de plus la variable utilisateur, qui est identitifié et récupéré automatiquement dès qu'on se log grâce au token
 
-        $entityManager->persist($sortie); //on passe en paramètre l'entity emanager, qui gère les entités // persist prépare l'envoi de la donnée
-        $entityManager->flush(); //envoi des données dans la dbb
+    #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]
+    public function registertoSortie(Sortie $sortie, EntityManagerInterface $entityManager): Response
+    {
+        $sortie->addUser($this->getUser());
+        $entityManager->persist($sortie);
+        $entityManager->flush();
 
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    /*
-    #[Route('/{id}', name: 'sortie_cancel', methods: ['POST'])]
-    public function cancel(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository): Response
+    #[Route('/{id}/desist', name: 'sortie_desist', methods: ['GET','POST'])]
+    public function desist(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(SortieType::class, $sortie);
-        $form->handleRequest($request);
+        $sortie->removeUser($this->getUser());
+        $entityManager->persist($sortie);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($this->isCsrfTokenValid('cancel' . $sortie->getId(), $request->request->get('_token'))) {
-                $sortieRepository->remove($sortie, true);
-                $etat->setLibelle('Sortie annulée');
-            }
-            return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
-        }
-            return $this->renderForm('pages/sortie/cancel.html.twig', [
-                'sortie' => $sortie,
-                'form' => $form,
-            ]);
-        }
+        return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+    }
 
-*/
+
+//
+//    #[Route('/{id}', name: 'sortie_cancel', methods: ['POST'])]
+//    public function cancel(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository): Response
+//    {
+//        $form = $this->createForm(SortieType::class, $sortie);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            if ($this->isCsrfTokenValid('cancel' . $sortie->getId(), $request->request->get('_token'))) {
+//                $sortieRepository->remove($sortie, true);
+//                $etat->setLibelle('Sortie annulée');
+//            }
+//            return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//            return $this->renderForm('pages/sortie/cancel.html.twig', [
+//                'sortie' => $sortie,
+//                'form' => $form,
+//            ]);
+//        }
+
 
 }
