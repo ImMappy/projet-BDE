@@ -138,7 +138,7 @@ class SortieController extends AbstractController
     }
 
 
-    #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]  
+    #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]
     public function registertoSortie(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
         $sortie->addUser($this->getUser());
