@@ -10,14 +10,15 @@
                 <h1>{{ user.prenom }} {{ user.nom }}</h1>
             </div>
         </div>
-        <div>
-            <img src="{{ asset('uploads/images/' ~ user.image) }}" width="50" alt="{{ user.image }}">
+
+        <section class="d-flex justify-content-center ">
+        <div class="col-5">
+            <img src="{{ asset('uploads/images/' ~ user.image) }}" width="250" alt="{{ user.image }}">
         </div>
-        <div class="row">
-            <div class="col">
-                <table class="table">
+        <div class="d-flex col-7">
+                <table class="table table-striped">
                     <tbody>
-                    <tr>
+                    <tr class="p-">
                         <th>Prenom</th>
                         <td>{{ user.prenom }}</td>
                     </tr>
@@ -39,8 +40,8 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
         </div>
+        </section>
         <div class="row mb-5 mt-3">
             <div class="col text-end mx-4">
                 <a href="{{ path('sortie_index') }}"  class="btn btn-outline-primary">Revenir a l'accueil</a>
@@ -49,6 +50,7 @@
                 <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-outline-primary text-decoration-none">Modifier</a>
             </div>
         </div>
+
     </div>
     {% endif %}
     {% if not app.user %}
