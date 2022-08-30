@@ -137,6 +137,13 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * Inscrire un User a une Sortie
+     * @param Sortie $sortie
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]  //appelle sortie qyi recupère l'id de la sortie
     public function registertoSortie(Sortie $sortie,User $user, EntityManagerInterface $entityManager): Response
     {
