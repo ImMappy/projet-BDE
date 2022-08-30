@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,6 +96,17 @@ class SortieController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
         }
+
+        return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/register', name: 'sortie_register_event', methods: ['GET','POST'])]  //appelle sortie qyi recupère l'id de la sortie
+    public function registertoSortie(Sortie $sortie, User $user, EntityManagerInterface $entityManager): Response
+    {
+        $sortie->addUser($user); //addUser appelle la méthode située dans sortie entité et qui ajoute l'utilisateur dans une sortie // on attend de plus la variable utilisateur, qui est identitifié et récupéré automatiquement dès qu'on se log grâce au token
+
+        $entityManager->persist($sortie); //on passe en paramètre l'entity emanager, qui gère les entités // persist prépare l'envoi de la donnée
+        $entityManager->flush(); //envoi des données dans la dbb
 
         return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
     }
