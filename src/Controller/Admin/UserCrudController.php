@@ -36,7 +36,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('prenom'),
             EmailField::new('email'),
             TelephoneField::new('telephone'),
-            TextField::new('password')->setFormType(PasswordType::class),
+//            TextField::new('password')->setFormType(PasswordType::class),
             AssociationField::new('campus'),
             ImageField::new('image','Avatar')->setBasePath('uploads/images')->setUploadDir('public/uploads/images'),
             BooleanField::new('isAdministrateur'),
