@@ -41,8 +41,9 @@
                     </ul>
                     <div class="card-body text-center">
                         <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="text-decoration-none">Détail</a>
-                        <a>-</a>
+                        {% if app.user.id == sortie.organisateur.id %}
                         <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="text-decoration-none">Modifier</a>
+                        {% endif %}
                     </div>
                 </div>
 
