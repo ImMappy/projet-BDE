@@ -41,9 +41,16 @@
                     </ul>
                     <div class="card-body text-center">
                         <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="text-decoration-none">Détail</a>
+                        {% if  app.user.id != sortie.organisateur.id %}
+                                <a href="{{ path('sortie_register_event',{'id':sortie.id, 'id2':app.user.id}) }}">S'inscrire</a>
+                        {% endif %}
+
                         {% if app.user.id == sortie.organisateur.id %}
                         <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="text-decoration-none">Modifier</a>
                         {% endif %}
+{#                        {% if app.user.id in collection %}#}
+{#                            <p>se desister</p>#}
+{#                        {% endif %}#}
                     </div>
                 </div>
 
