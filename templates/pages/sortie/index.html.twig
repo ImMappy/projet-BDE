@@ -22,16 +22,14 @@
         </div>
         <div class="row">
             <div class="col">
-<<<<<<< HEAD
-                <h1 class="text-center mb-4 mb-2">Liste des sorties</h1>
+                <h1 class="text-center my-2">Liste des sorties</h1>
             </div>
         </div>
-
         <div class="row">
 
             {% for sortie in sorties %}
                 <div class="col-4 d-flex justify-content-center p-5">
-                    <div class="card w-100" style="">
+                    <div class="card w-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">{{ sortie.nom }}</h5>
                             <br>
@@ -50,47 +48,17 @@
                             <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="text-decoration-none align-middle">Modifier</a>
                             {% endif %}
                         </div>
-=======
-                {% for sortie in sorties %}
-                <div class="card" style="width: 20rem;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ sortie.nom }}</h5>
-                        <p class="card-text">{{ sortie.infosSortie }}</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Date: {{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m - H:i') : '' }}</li>
-                        <li class="list-group-item">Durée: {{ sortie.duree }}</li>
-                        <li class="list-group-item">Limite d'inscription: {{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m - H:i') : '' }}</li>
-                        <li class="list-group-item">Organisateur: {{ sortie.organisateur.getFullName }}</li>
-                    </ul>
-                    <div class="card-body text-center">
-                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="text-decoration-none">Détail</a>
-                        {% if  app.user.id != sortie.organisateur.id %}
-                                <a href="{{ path('sortie_register_event',{'id':sortie.id, 'id2':app.user.id}) }}">S'inscrire</a>
-                        {% endif %}
-
-                        {% if app.user.id == sortie.organisateur.id %}
-                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="text-decoration-none">Modifier</a>
-                        {% endif %}
-{#                        {% if app.user.id in collection %}#}
-{#                            <p>se desister</p>#}
-{#                        {% endif %}#}
->>>>>>> origin/master
                     </div>
                 </div>
             {% endfor %}
 
         </div>
-            <div class="text-center my-4">
-                <a href="{{ path('sortie_new',{'id':app.user.id}) }}" class="btn btn-outline-primary">Create new</a>
-            </div>
-
+        <div class="text-center my-4">
+            <a href="{{ path('sortie_new',{'id':app.user.id}) }}" class="btn btn-outline-primary">Create new</a>
         </div>
-
         {% else %}
         <div class="text-center">
             <h2>Aucune sortie à venir</h2>
-        </div>
         </div>
     </div>
     {% endif %}
