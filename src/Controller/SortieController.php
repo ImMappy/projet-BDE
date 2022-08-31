@@ -44,8 +44,6 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
-        // add organisateur to list of participants
-
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);
             $sortieRepository->add($sortie, true);

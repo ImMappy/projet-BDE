@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
@@ -19,12 +20,21 @@ class Sortie
     #[ORM\Column(length: 150)]
     private ?string $nom = null;
 
+//    #[Assert\Type(type:"date")]
+//    #[Assert\NotBlank(message:"Veuillez renseigner la date et l'heure de début de la sortie!")]
+//    #[Assert\Length(min:"LocalDate",
+//        minMessage: "La date du début de la sortie ne peut être avant la date du jour")]
     #[ORM\Column]
     private ?\DateTimeImmutable $dateHeureDebut = null;
 
     #[ORM\Column]
     private ?int $duree = null;
 
+//    #[Assert\Type(type:"date")]
+//    #[Assert\NotBlank(message:"Veuillez renseigner la date et l'heure de clôture des inscriptions à la sortie")]
+//    #[Assert\Length(min:"LocalDate", max:"dateHeureDebut",
+//        minMessage: "La date limite de l'inscription à la sortie ne peut être avant la date du jour",
+//        maxMessage: "La date limite de l'inscription à la sortie ne peut être après la date et l'heure de début de la sortie")]
     #[ORM\Column]
     private ?\DateTimeImmutable $dateLimiteInscription = null;
 
@@ -75,11 +85,13 @@ class Sortie
         return $this;
     }
 
+    #[Assert\DateTime]
     public function getDateHeureDebut(): ?\DateTimeImmutable
     {
         return $this->dateHeureDebut;
     }
 
+    #[Assert\DateTime]
     public function setDateHeureDebut(\DateTimeImmutable $dateHeureDebut): self
     {
         $this->dateHeureDebut = $dateHeureDebut;
