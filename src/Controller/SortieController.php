@@ -19,13 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/sortie')]
 class SortieController extends AbstractController
 {
-    /**
-     * Afficher toutes les Sorties
-     * @param SortieRepository $sortieRepository
-     * @param PaginatorInterface $paginator
-     * @param Request $request
-     * @return Response
-     */
+
     #[Route('/', name: 'sortie_index', methods: ['GET'])]
     public function index(SortieRepository $sortieRepository,PaginatorInterface $paginator,Request $request): Response
     {
@@ -41,14 +35,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-    /**
-     * Creer une nouvelle sortie
-     * @param Request $request
-     * @param SortieRepository $sortieRepository
-     * @param UserRepository $repository
-     * @param $id
-     * @return Response
-     */
     #[Route('/new/{id}', name: 'sortie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
@@ -59,7 +45,6 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         // add organisateur to list of participants
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($user);
@@ -75,12 +60,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-    /**
-     * Montrer les details d'une Sortie
-     *
-     * @param Sortie $sortie
-     * @return Response
-     */
     #[Route('/{id}', name: 'sortie_show', methods: ['GET'])]
     public function show(Sortie $sortie): Response
     {
@@ -91,15 +70,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-    /**
-     * Modifier une sortie
-     * @param Request $request
-     * @param Sortie $sortie
-     * @param SortieRepository $sortieRepository
-     * @param UserRepository $repository
-     * @param $id
-     * @return Response
-     */
     #[Route('/{id}/edit', name: 'sortie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sortie $sortie, SortieRepository $sortieRepository, UserRepository $repository, $id): Response
     {
@@ -120,13 +90,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-    /**
-     * Supprimer une Sortie
-     * @param Request $request
-     * @param Sortie $sortie
-     * @param SortieRepository $sortieRepository
-     * @return Response
-     */
     #[Route('/{id}', name: 'sortie_delete', methods: ['POST'])]
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
