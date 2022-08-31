@@ -22,15 +22,70 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <h1 class="text-center my-2 ">Liste des sorties</h1>
+            <div class="col-4">
+                <label for="campus" class="fw-bold">Campus</label>
+                <br>
+                <select name="campus" id="campus"> <!-- Put {campus} in this list -->
+                    <option value="">Paris</option>
+                    <option value="">Nantes</option>
+                    <option value="">Niort</option>
+                </select>
+                <br>
+                <br>
+                <label for="searchbar" class="fw-bold">Recherche</label>
+                <br>
+                <input type="text" placeholder="ex: bar, plage, jeux..." >
+                <script>
+                    document.getElementsByName("searchbar")
+                </script>
+            </div>
+            <div class="col-4">
+                <label for="start" class="fw-bold">Entre</label>
+                <br>
+                <input type="date" id="start" name="trip-start"
+                       value="2022-08-31"
+                       min="2022-01-01" max="2022-12-31">
+                <br>
+                <br>
+                <label for="end" class="fw-bold">et</label>
+                <br>
+                <input type="date" id="end" name="trip-end"
+                       value="2022-08-31"
+                       min="2022-01-01" max="2022-12-31">
+            </div>
+            <div class="col-4">
+                <fieldset>
+                    <label for="filtres" class="fw-bold">Filtres</label>
+                    <div>
+                        <input type="checkbox" id="orga" name="orga">
+                        <label for="scales">Sorties dont je suis l'organisateur(trice)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="inscrit" name="inscrit">
+                        <label for="inscrit">Sorties auxquelles je suis inscrit(e)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="pasInscrit" name="pasInscrit">
+                        <label for="pasInscrit">Sorties auxquelles je ne suis pas inscrit(e)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="orga" name="passees">
+                        <label for="passees">Sorties passées</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-primary">Recherche</button>
             </div>
         </div>
         <div class="row">
 
             {% for sortie in sorties %}
                 <div class="col-4 d-flex justify-content-center p-5 ">
-                    <div class="card w-100 shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card w-100 shadow-lg p-3 bg-white rounded">
                         <div class="card-body">
                             <h5 class="card-title text-center">{{ sortie.nom }}</h5>
                             <br>
@@ -43,10 +98,10 @@
                             <li class="list-group-item">Organisateur: {{ sortie.organisateur.getFullName }}</li>
                         </ul>
                         <div class="card-body text-center">
-                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
                                 {% if app.user.id != sortie.organisateur.id %}
-                                    <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
-                                    <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Se désister</a>
+                                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
+                                    {% else %}
+                                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
                                 {% endif %}
                             {% if app.user.id == sortie.organisateur.id %}
                                     <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
@@ -57,8 +112,8 @@
             {% endfor %}
 
         </div>
-        <div class="text-center my-4">
-            <a href="{{ path('sortie_new',{'id':app.user.id}) }}" class="btn btn-outline-primary">Create new</a>
+        <div class="text-center mb-5 mt-2">
+            <a href="{{ path('sortie_new',{'id':app.user.id}) }}" class="btn btn-outline-primary">Nouvelle sortie</a>
         </div>
         {% else %}
         <div class="text-center">
