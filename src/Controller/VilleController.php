@@ -5,14 +5,23 @@ namespace App\Controller;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\VilleRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 #[Route('/ville')]
 class VilleController extends AbstractController
 {
+    /**
+     * Afficher TOUTES les entités Ville
+     * @param VilleRepository $villeRepository
+     * @return Response
+     */
     #[Route('/', name: 'ville_index', methods: ['GET'])]
     public function index(VilleRepository $villeRepository): Response
     {
@@ -21,6 +30,12 @@ class VilleController extends AbstractController
         ]);
     }
 
+    /**
+     * Ajouter une nouvelle entité Ville
+     * @param Request $request
+     * @param VilleRepository $villeRepository
+     * @return Response
+     */
     #[Route('/new', name: 'ville_new', methods: ['GET', 'POST'])]
     public function new(Request $request, VilleRepository $villeRepository): Response
     {
@@ -40,6 +55,11 @@ class VilleController extends AbstractController
         ]);
     }
 
+    /**
+     * Afficher une entité Ville par ID
+     * @param Ville $ville
+     * @return Response
+     */
     #[Route('/{id}', name: 'ville_show', methods: ['GET'])]
     public function show(Ville $ville): Response
     {
@@ -48,6 +68,13 @@ class VilleController extends AbstractController
         ]);
     }
 
+    /**
+     * Modifier une entité Ville
+     * @param Request $request
+     * @param Ville $ville
+     * @param VilleRepository $villeRepository
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'ville_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ville $ville, VilleRepository $villeRepository): Response
     {
@@ -66,6 +93,13 @@ class VilleController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprimer une entité Ville
+     * @param Request $request
+     * @param Ville $ville
+     * @param VilleRepository $villeRepository
+     * @return Response
+     */
     #[Route('/{id}', name: 'ville_delete', methods: ['POST'])]
     public function delete(Request $request, Ville $ville, VilleRepository $villeRepository): Response
     {
