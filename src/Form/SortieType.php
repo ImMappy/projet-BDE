@@ -95,7 +95,6 @@ class SortieType extends AbstractType
                     'class'=>'mb-3'
                 ]
             ])
-
             ->add('submit2',SubmitType::class,[
                 'label'=> 'Publier la sortie',
                 'attr'=>[

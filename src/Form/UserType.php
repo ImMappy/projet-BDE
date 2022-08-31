@@ -19,47 +19,48 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email',EmailType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'class' => 'form-control'
                 ]
 
             ])
-            ->add('password',PasswordType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
+            ->add('password', PasswordType::class, [
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('nom',TextType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
-                    ]
-                ])
-            ->add('prenom',TextType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
+            ->add('nom', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('telephone',TextType::class,[
-                'attr'=>[
-                    'class'=>'form-control'
+            ->add('prenom', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('telephone', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
             ->add('Roles', ChoiceType::class, [
                 'required' => true,
                 'multiple' => false,
                 'expanded' => false,
-                'choices'  => [
+                'choices' => [
                     'User' => 'ROLE_USER',
                     'Admin' => 'ROLE_ADMIN',
                 ],
             ])
-            ->add('image', FileType::class,[
+            ->add('image', FileType::class, [
                 'label' => false,
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false
             ])
+
             ->add('isAdministrateur')
             ->add('isActif')
             ->add('submit',SubmitType::class,[

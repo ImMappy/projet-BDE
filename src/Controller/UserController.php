@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 #[Route('/user')]
@@ -98,7 +99,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, EntityManagerInterface $entityManager, Sluggerinterface $slugger): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -111,16 +112,35 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $userRepository->add($user, true);
+//            $avatarFile = $form->get('image')->getData();
+//
+//            if ($avatarFile) {
+//                $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+//                // this is needed to safely include the file name as part of the URL
+//                $safeFilename = $slugger->slug($originalFilename);
+//                $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
+//
+//                // Move the file to the directory where brochures are stored
+//                try {
+//                    $avatarFile->move(
+//                        $this->getParameter('brochures_directory'),
+//                        $newFilename
+//                    );
+//                } catch (FileException $e) {
+//                    // ... handle exception if something happens during file upload
+//                }
+//
+//                $user->setImage($newFilename);
+                $userRepository->add($user, true);
+            
+                return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+            }
 
-            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->renderForm('pages/user/edit.html.twig', [
+                'user' => $user,
+                'form' => $form,
+            ]);
         }
-
-        return $this->renderForm('pages/user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
 
     /**
      * Supprimer une entité User
