@@ -5,14 +5,23 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Form\EtatType;
 use App\Repository\EtatRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 #[Route('/etat')]
 class EtatController extends AbstractController
 {
+    /**
+     * Afficher TOUTES les entités Etat
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
     #[Route('/', name: 'etat_index', methods: ['GET'])]
     public function index(EtatRepository $etatRepository): Response
     {
@@ -21,6 +30,12 @@ class EtatController extends AbstractController
         ]);
     }
 
+    /**
+     * Ajouter une nouvelle entité Etat
+     * @param Request $request
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
     #[Route('/new', name: 'etat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EtatRepository $etatRepository): Response
     {
@@ -40,6 +55,11 @@ class EtatController extends AbstractController
         ]);
     }
 
+    /**
+     * Afficher une entité Etat par ID
+     * @param Etat $etat
+     * @return Response
+     */
     #[Route('/{id}', name: 'etat_show', methods: ['GET'])]
     public function show(Etat $etat): Response
     {
@@ -48,6 +68,13 @@ class EtatController extends AbstractController
         ]);
     }
 
+    /**
+     * Modifier une entité Etat
+     * @param Request $request
+     * @param Etat $etat
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'etat_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Etat $etat, EtatRepository $etatRepository): Response
     {
@@ -66,6 +93,13 @@ class EtatController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprimer une entité Etat
+     * @param Request $request
+     * @param Etat $etat
+     * @param EtatRepository $etatRepository
+     * @return Response
+     */
     #[Route('/{id}', name: 'etat_delete', methods: ['POST'])]
     public function delete(Request $request, Etat $etat, EtatRepository $etatRepository): Response
     {
