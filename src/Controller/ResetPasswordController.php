@@ -32,7 +32,11 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Display & process form to request a password reset.
+     * Récupérer l'email via un form
+     * @param Request $request
+     * @param MailerInterface $mailer
+     * @param TranslatorInterface $translator
+     * @return Response
      */
     #[Route('/', name: 'reset_password')]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
@@ -54,7 +58,8 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Confirmation page after a user has requested a password reset.
+     * Renvoyer vers une page de confirmation
+     * @return Response
      */
     #[Route('/check-email', name: 'app_check_email')]
     public function checkEmail(): Response
@@ -71,7 +76,12 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Validates and process the reset URL that the user clicked in their email.
+     * Valider la procédure de reset de password via l'URL
+     * @param Request $request
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param TranslatorInterface $translator
+     * @param string|null $token
+     * @return Response
      */
     #[Route('/reset/{token}', name: 'app_reset_password')]
     public function reset(Request $request, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator, string $token = null): Response

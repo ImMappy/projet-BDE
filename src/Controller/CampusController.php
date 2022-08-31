@@ -5,14 +5,25 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Form\CampusType;
 use App\Repository\CampusRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
+
+
 #[Route('/campus')]
 class CampusController extends AbstractController
 {
+    /**
+     * Affichage des Campus
+     * @param CampusRepository $campusRepository
+     * @return Response
+     */
     #[Route('/', name: 'campus_index', methods: ['GET'])]
     public function index(CampusRepository $campusRepository): Response
     {
@@ -21,6 +32,12 @@ class CampusController extends AbstractController
         ]);
     }
 
+    /**
+     * Ajouter un nouveau Campus
+     * @param Request $request
+     * @param CampusRepository $campusRepository
+     * @return Response
+     */
     #[Route('/new', name: 'campus_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CampusRepository $campusRepository): Response
     {
@@ -40,6 +57,11 @@ class CampusController extends AbstractController
         ]);
     }
 
+    /**
+     * Affichage d'un Campus par son ID
+     * @param Campus $campus
+     * @return Response
+     */
     #[Route('/{id}', name: 'campus_show', methods: ['GET'])]
     public function show(Campus $campus): Response
     {
@@ -48,6 +70,13 @@ class CampusController extends AbstractController
         ]);
     }
 
+    /**
+     * Modification d'un Campus
+     * @param Request $request
+     * @param Campus $campus
+     * @param CampusRepository $campusRepository
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'campus_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Campus $campus, CampusRepository $campusRepository): Response
     {
@@ -66,6 +95,13 @@ class CampusController extends AbstractController
         ]);
     }
 
+    /**
+     * Suppression dun Campus
+     * @param Request $request
+     * @param Campus $campus
+     * @param CampusRepository $campusRepository
+     * @return Response
+     */
     #[Route('/{id}', name: 'campus_delete', methods: ['POST'])]
     public function delete(Request $request, Campus $campus, CampusRepository $campusRepository): Response
     {
