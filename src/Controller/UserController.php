@@ -11,14 +11,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
+
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    /**
+     * Afficher TOUTES les entités User
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/', name: 'user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -27,9 +32,15 @@ class UserController extends AbstractController
         ]);
     }
 
-
-
-
+    /**
+     * Ajouter une nouvelle entité User
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param UserAuthenticatorInterface $userAuthenticator
+     * @param AppAuthenticator $authenticator
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
 
     #[Route('/register', name: 'user_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
@@ -64,10 +75,11 @@ class UserController extends AbstractController
         ]);
     }
 
-
-
-
-
+    /**
+     * Afficher une entité User par ID
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -76,6 +88,15 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Modifier une entité User
+     * @param Request $request
+     * @param User $user
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
@@ -101,6 +122,13 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprimer une entité User
+     * @param Request $request
+     * @param User $user
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
