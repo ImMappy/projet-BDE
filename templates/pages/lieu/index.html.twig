@@ -3,12 +3,14 @@
 {% block title %}Lieu index{% endblock %}
 
 {% block body %}
-    <h1>Lieu index</h1>
+    <div class="d-flex justify-content-start mx-4 my-4  ">
+        <a class="btn btn-primary"href="{{ path('sortie_index') }}">Retour a l'accueil</a>
 
-    <table class="table">
+    </div>
+    <h1 class="text-center my-4">Lieu index</h1>
+    <table class="table table-striped table-hover w-75 mx-auto border rounded ">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Rue</th>
                 <th>Latitude</th>
@@ -19,14 +21,15 @@
         <tbody>
         {% for lieu in lieus %}
             <tr>
-                <td>{{ lieu.id }}</td>
                 <td>{{ lieu.nom }}</td>
                 <td>{{ lieu.rue }}</td>
                 <td>{{ lieu.latitude }}</td>
                 <td>{{ lieu.longitude }}</td>
                 <td>
-                    <a href="{{ path('lieu_show', {'id': lieu.id}) }}">show</a>
-                    <a href="{{ path('lieu_edit', {'id': lieu.id}) }}">edit</a>
+                    <a class="btn btn-primary"href="{{ path('lieu_show', {'id': lieu.id}) }}">Détail</a>
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <a class="btn btn-warning" href="{{ path('lieu_edit', {'id': lieu.id}) }}">Modifier</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -36,6 +39,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-success my-4 text-center"href="{{ path('lieu_new') }}">Ajouter un lieu</a>
 
-    <a href="{{ path('lieu_new') }}">Create new</a>
+    </div>
 {% endblock %}

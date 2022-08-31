@@ -116,9 +116,9 @@ class LieuController extends AbstractController
      * @return Response (format JSON)
      */
     #[Route('/api/{id}', name: 'lieu_api')]
-    public function getApi(Lieu $lieu, LieuRepository $lieuRepository,$id): Response
+    public function getApi(Lieu $lieu): Response
     {
-            $lieuId = [
+            $lieuMap = [
                 'id' => $lieu->getId(),
                 'nom' => $lieu->getNom(),
                 'latitude' => $lieu->getLatitude(),
@@ -126,6 +126,6 @@ class LieuController extends AbstractController
             ];
 
 
-        return new JsonResponse($lieuId);
+        return new JsonResponse($lieuMap);
     }
 }
