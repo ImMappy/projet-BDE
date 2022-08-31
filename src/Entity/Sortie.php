@@ -86,7 +86,7 @@ class Sortie
         return $this;
     }
 
-    #[Assert\NotBlank(message:"Veuillez renseigner la date et l'heure de début de la sortie!")]
+    #[Assert\NotBlank(message:"Veuillez renseigner la date et l'heure de début de la sortie")]
     #[Assert\GreaterThanOrEqual('today UTC', message: "La date du début de la sortie ne peut être antérieure à la date du jour")]
 
     public function getDateHeureDebut(): ?\DateTimeImmutable
@@ -115,7 +115,7 @@ class Sortie
 
     #[Assert\NotBlank(message:"Veuillez renseigner la date et l'heure de clôture des inscriptions à la sortie")]
     #[Assert\GreaterThanOrEqual('today UTC', message: "La date de clôture des inscriptions à la sortie ne peut être antérieure à la date du jour",)]
-    #[Assert\LessThan(propertyPath:'dateHeureDebut', message: "La date de clôture des inscriptions à la sortie ne peut être postérieure à la date et l'heure de début de la sortie")]
+    #[Assert\LessThan(propertyPath:'dateHeureDebut', message: "La date de clôture des inscriptions à la sortie ne peut être postérieure à la date de début de la sortie")]
 
     public function getDateLimiteInscription(): ?\DateTimeImmutable
     {
