@@ -34,8 +34,9 @@ class SortieType extends AbstractType
             ])
             ->add('dateHeureDebut',DateTimeType::class,[
                 'input'=>'datetime_immutable',
+                'widget' => 'single_text',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'form-control mb-3'
                 ],
                 'label' => 'Date début sortie'
             ])
@@ -47,8 +48,9 @@ class SortieType extends AbstractType
             ])
             ->add('dateLimiteInscription',DateTimeType::class,[
                 'input'=>'datetime_immutable',
+                'widget' => 'single_text',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'form-control mb-3'
                 ],
                 'label'=> 'Date limite inscription'
             ])
