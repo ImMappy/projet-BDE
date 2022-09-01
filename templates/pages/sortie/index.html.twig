@@ -91,14 +91,23 @@
                     <!-- ################################################################################### btn recherche -->
                 </div>
                     <div class="row">
-                        <div class="col d-flex justify-content-center my-3">
-                            <button class="btn btn-primary">Recherche</button>
+                        <div class="col d-flex justify-content-end my-3 mx-3">
+                            <a href="{{ path('sortie_new',{'id':app.user.id}) }}" class="btn btn-outline-primary w-25">Nouvelle sortie</a>
+                        </div>
+                        <div class="col d-flex justify-content-start my-3 mx-3">
+                            <button class="btn btn-outline-primary w-25">Recherche</button>
                         </div>
                     </div>
 
             </div>
         </div>
-
+        <div class="row">
+            <div class="col">
+                <div class="navigation d-flex justify-content-center">
+                    {{ knp_pagination_render(sorties) }}
+                </div>
+            </div>
+        </div>
         <div class="row">
             {% for sortie in sorties %}
                 <div class="col-4 d-flex justify-content-center p-5 ">
@@ -128,16 +137,13 @@
             {% endfor %}
 
         </div>
-        <div class="text-center mb-5 mt-2">
-            <a href="{{ path('sortie_new',{'id':app.user.id}) }}" class="btn btn-outline-primary">Nouvelle sortie</a>
-        </div>
         {% else %}
         <div class="text-center">
             <h2>Aucune sortie à venir</h2>
         </div>
     </div>
     {% endif %}
-    <div class="navigation d-flex justify-content-center">
+    <div class="navigation d-flex justify-content-center my-5">
         {{ knp_pagination_render(sorties) }}
     </div>
 
