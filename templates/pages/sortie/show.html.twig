@@ -51,28 +51,27 @@
                     <th>Inscription</th>
                         <div class="my-4 d-flex">
                             <td>
-                            <div class="d-flex justify-content-between align-items-center">
-                                    {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection and "now"|date('Y-m-d H:i:s') <= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
-                                        <p class="mt-2 text-start ">Vous n'êtes pas inscrit</p>
-                                        <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-2 h-50">S'inscrire</a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    {% if sortie.motif == null %}
+                                        {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection and "now"|date('Y-m-d H:i:s') <= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
+                                            <p class="mt-2 text-start ">Vous n'êtes pas inscrit</p>
+                                            <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-2 h-50">S'inscrire</a>
+                                        {% endif %}
+                                        {% if app.user in userCollection and "now"|date('Y-m-d H:i:s') <= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
+                                            <p class="mt-2 text-start ">Vous êtes inscrit</p>
+                                            <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
+                                                {% if "now"|date('Y-m-d H:i:s') >= sortie.dateLimiteInscription|date('Y-m-d H:i:s') %}
+                                            <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
+                                                {% endif %}
+                                        {% endif %}
                                     {% endif %}
-                                    {% if app.user in userCollection and "now"|date('Y-m-d H:i:s') <= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
-                                        <p class="mt-2 text-start ">Vous êtes inscrit</p>
-                                        <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
-                                            {% if "now"|date('Y-m-d H:i:s') >= sortie.dateLimiteInscription|date('Y-m-d H:i:s') %}
-                                        <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
-                                            {% endif %}
-                                    {% endif %}
-                            </div>
+                                </div>
                             </td>
                             </div>
                 </tr>
             </tbody>
         </table>
-
-
-
-
+            {% if sortie.motif == null %}
             <h4 class="text-center mb-3">Participants</h4>
             <ul class="list-group list-group-numbered">
                 {% for element in userCollection %}
@@ -83,33 +82,25 @@
             </ul>
             <p class="mt-3 text-center ">Places restantes : {{ sortie.nbInscriptionsMax - userCollection|length  }}/{{ sortie.nbInscriptionsMax }}</p>
             <div class="my-5 d-flex justify-content-center flex-column">
-            <div>
-                {%  if userCollection|length == sortie.nbInscriptionsMax%}
-                    <h3 class="text-center">Evenement complet</h3>
-                {% endif %}
-            </div>
-            <div class="d-flex">
-                {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection%}
-                    <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
-                {% endif %}
-                {% if app.user in userCollection and app.user.id != sortie.organisateur.id %}
+                <div>
+                    {%  if userCollection|length == sortie.nbInscriptionsMax%}
+                        <h3 class="text-center">Evenement complet</h3>
+                    {% endif %}
+                </div>
+                <div class="d-flex">
+                    {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection%}
+                        <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
+                    {% endif %}
+                    {% if app.user in userCollection and app.user.id != sortie.organisateur.id %}
 
-                    <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-3">Se désinscrire</a>
-                {% endif %}
-                <div class="d-flex justify-content-center ">
-                    {% if app.user.id == sortie.organisateur.id %}
-                        {{ include('pages/sortie/_delete_form.html.twig') }}
-                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-warning mx-3">Modifier</a>
+                        <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-3">Se désinscrire</a>
                     {% endif %}
                 </div>
             </div>
-            <div class="mx-3">
-                {% if app.user.id == sortie.organisateur.id %}
-                    {{ include('pages/sortie/_delete_form.html.twig') }}
-                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-warning mx-3">Modifier</a>
-                {% endif %}
-            </div>
-            </div>
+                {% else %}
+                <h4 class="text-center">Événement annulé</h4>
+            {% endif %}
+
         </section>
     </div>
 {% endblock %}
