@@ -12,23 +12,23 @@
         </div>
 
         <section class="row ">
-            <div class=" col-sm-12 col-md-5 ">
+            <div class="col-sm-12 col-md-5 text-center">
                 {%  if app.user.image %}
                 <img src="{{ asset('uploads/images/' ~ user.image) }}" width="250" alt="{{ user.image }}">
                 {% else %}
                     <img src="{{ asset('assets/img/default.png') }}" width="250" alt="{{ user.image }}">
                 {%  endif %}
             </div>
-            <div class=" col-sm-12 col-md-7  ">
+            <div class=" col-sm-12 col-md-7">
                     <table class="table">
                         <tbody>
                         <tr >
                             <th class="text-start">Prenom</th>
-                            <td>{{ user.prenom }}</td>
+                            <td class="text-capitalize">{{ user.prenom }}</td>
                         </tr>
                         <tr>
                             <th>Nom</th>
-                            <td>{{ user.nom }}</td>
+                            <td class="text-capitalize">{{ user.nom }}</td>
                         </tr>
                         <tr>
                             <th>Telephone</th>
@@ -46,7 +46,7 @@
                     </table>
             </div>
         </section>
-        <div class="row mb-5 mt-3">
+        <div class="row my-5">
             <div class="col text-end mx-4">
                 <a href="{{ path('sortie_index') }}"  class="btn btn-outline-primary">Revenir a l'accueil</a>
             </div>
