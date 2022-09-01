@@ -150,13 +150,12 @@
                                         <li class="list-group-item">Organisateur: {{ sortie.organisateur.getFullName }}</li>
                                     </ul>
                                     <div class="card-body text-center">
-                                        {% if app.user.id != sortie.organisateur.id %}
-                                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
-                                        {% else%}
-                                            <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
-
-                                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
-                                        {% endif %}
+                                            {% if app.user.id == sortie.organisateur.id and sortie.motif == null  %}
+                                                <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
+                                                <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
+                                            {% else%}
+                                                <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
+                                            {% endif %}
                                     </div>
                                 </div>
                             </div>
