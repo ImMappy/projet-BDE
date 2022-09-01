@@ -1,19 +1,16 @@
-{#{% extends './base.html.twig' %}#}
+{% extends './base.html.twig' %}
 
-{#{% block title %}Annuler la sortie{% endblock %}#}
+{% block title %}Annuler la sortie{% endblock %}
 
-{#{% block body %}#}
-{#    <h1>Annuler la sortie</h1>#}
+{% block body %}
+    <h1 class="text-center my-4">Annuler la sortie</h1>
+    <div class="w-75 mx-auto">
+        {{ form(form) }}
+    </div>
 
 
-{#    <button> Enregistrer </button>#}
+    <button> Annuler </button>
 
-{#    {{ form(form) }} #}{# appelle 'form' dans render form de l'edit du UserController #}
+       <a href="{{ path('sortie_index') }}">Revenir à l'accueil</a>
 
-{#    <button> Annuler </button>#}
-
-{#        <a href="{{ path('sortie_index') }}">Revenir à l'accueil</a>#}
-
-{#        {{ include('pages/sortie/cancel.html.twig') }}#}
-
-{#{% endblock %}#}
+{% endblock %}
