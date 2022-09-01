@@ -1,8 +1,7 @@
+const pos = document.getElementById('sortie-lieu').value
 
-
-const getMap = () => {
-
-    const url = `http://localhost:8000/lieu/api/${4}`
+const getMap = (id) => {
+    const url = `http://localhost:8000/lieu/api/${id}`
     fetch(url).then((resp) => resp.json()).then((data) => {
         let {latitude, longitude} = data;
         let map = L.map('map').setView([latitude, longitude], 13);
@@ -15,4 +14,4 @@ const getMap = () => {
     })
 }
 
-getMap()
+getMap(pos)
