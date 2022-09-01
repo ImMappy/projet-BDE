@@ -11,37 +11,40 @@
             </div>
         </div>
 
-        <section class="d-flex">
-        <div class="col-5 text-center">
-            <img src="{{ asset('uploads/images/' ~ user.image) }}" width="250" alt="{{ user.image }}">
+        <div class="row">
+            <section class="d-flex">
+                <div class="col-5 text-center">
+                    <img src="{{ asset('uploads/images/' ~ user.image) }}" width="250" alt="{{ user.image }}">
+                </div>
+                <div class="d-flex col-7">
+                    <table class="table">
+                        <tbody>
+                        <tr class="p-">
+                            <th class="text-start">Prenom</th>
+                            <td class="text-capitalize">{{ user.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td class="text-capitalize">{{ user.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Telephone</th>
+                            <td>{{ user.telephone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Campus</th>
+                            <td>{{ user.campus }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-        <div class="d-flex col-7">
-                <table class="table">
-                    <tbody>
-                    <tr class="p-">
-                        <th class="text-start">Prenom</th>
-                        <td class="text-capitalize text-end">{{ user.prenom }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nom</th>
-                        <td class="text-capitalize">{{ user.nom }}</td>
-                    </tr>
-                    <tr>
-                        <th>Telephone</th>
-                        <td>{{ user.telephone }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Campus</th>
-                        <td>{{ user.campus }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-        </div>
-        </section>
+
         <div class="row mb-5 mt-3">
             <div class="col text-end mx-4">
                 <a href="{{ path('sortie_index') }}"  class="btn btn-outline-primary">Revenir a l'accueil</a>

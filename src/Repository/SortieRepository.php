@@ -46,7 +46,7 @@ class SortieRepository extends ServiceEntityRepository
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
+//            ->setParameter('val', $value$)
 //            ->orderBy('s.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
