@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>Create new Lieu</h1>
-
-    {{ include('pages/lieu/_form.html.twig') }}
+    <div class="w-75 mx-auto">
+        {{ include('pages/lieu/_form.html.twig') }}
+    </div>
 
     <a href="{{ path('lieu_index') }}">back to list</a>
 {% endblock %}
