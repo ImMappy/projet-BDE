@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Sortie;
+use App\Form\CancelType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\SortieRepository;
@@ -189,7 +190,23 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
     }
-
+    #[Route('/annuler/{id}',name: 'sortie_annuler',methods: ['GET','POST'])]
+    public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, $id) : Response
+    {
+        $sortieRepository->find($id);
+        $form = $this->createForm(CancelType::class,$sortie);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->redirectToRoute('sortie_index');
+        }
+        return $this->renderForm('pages/sortie/cancel.html.twig',[
+            'form'=>$form,
+            'sortie'=>$sortie
+        ]);
+    }
     #[Route('/{id}/desist', name: 'sortie_desist', methods: ['GET','POST'])]
     public function desist(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
@@ -201,25 +218,7 @@ class SortieController extends AbstractController
     }
 
 
-//
-//    #[Route('/{id}', name: 'sortie_cancel', methods: ['POST'])]
-//    public function cancel(Request $request, Sortie $sortie, Etat $etat, SortieRepository $sortieRepository): Response
-//    {
-//        $form = $this->createForm(SortieType::class, $sortie);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            if ($this->isCsrfTokenValid('cancel' . $sortie->getId(), $request->request->get('_token'))) {
-//                $sortieRepository->remove($sortie, true);
-//                $etat->setLibelle('Sortie annulée');
-//            }
-//            return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
-//        }
-//            return $this->renderForm('pages/sortie/cancel.html.twig', [
-//                'sortie' => $sortie,
-//                'form' => $form,
-//            ]);
-//        }
+
 
 
 }
