@@ -41,29 +41,25 @@ class UserType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+
             ->add('image', FileType::class, [
-                'label' => false,
+                'label' => 'Image',
                 'multiple' => true,
                 'mapped' => false,
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
+
             ->add('submit',SubmitType::class,[
                 'attr'=>[
                     'class'=>'btn btn-outline-success my-4 text-center md-'
                 ],
                 'label'=>'Valider'
             ]);
-    //        $builder->get('Roles')
-    //            ->addModelTransformer(new CallbackTransformer(
-    //                function ($rolesArray) {
-    //                    // transform the array to a string
-    //                    return count($rolesArray)? $rolesArray[0]: null;
-    //                },
-    //                function ($rolesString) {
-    //                    // transform the string back to an array
-    //                    return [$rolesString];
-    //                }
-    //            ));
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -3,23 +3,16 @@
 {% block title %}New Sortie{% endblock %}
 
 {% block body %}
-
     <div class="container">
-        <div class="row text-center my-3">
+        <div class="row text-center my-5">
             <div class="col">
                 <h1>Nouvelle sortie</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-5">
             <div class="col">
                 {{ form(form) }}
             </div>
         </div>
-    </div>
-
-    <br>
-
-    <div class="text-center">
-        <a href="{{ path('sortie_index') }}" class="text-decoration-none">back to list</a>
     </div>
 {% endblock %}

@@ -3,11 +3,9 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-start mx-4 my-4  ">
-        <a class="btn btn-primary"href="{{ path('lieu_index') }}">Retour a la liste</a>
-    </div>
 
-    <h1 class="text-center my-3">Modifier profil</h1>
+
+    <h1 class="text-center my-5">Modifier profil</h1>
     <section class="w-75 mx-auto">
         {{ form_start(form) }}
             <div class="form-group my-2">
@@ -23,26 +21,23 @@
             <div class="form-group my-2">
                 {{ form_row(form.telephone) }}
             </div>
-        <div class="form-group my-2">
+            <div class="form-group my-2">
                 {{ form_row(form.image) }}
             </div>
-
     </section>
-    <div class="d-flex justify-content-center">
-        {{ form_widget(form.submit) }}
+    <div class="row mb-5 mt-3">
+        <div class="col d-flex justify-content-end mx-4 my-4  ">
+            <a class="btn btn-outline-primary" href="{{ path('lieu_index') }}">Retour a la liste</a>
+        </div>
+        <div class="col d-flex justify-content-start">
+            {{ form_widget(form.submit) }}
+        </div>
     </div>
             {{ form_end(form) }}
-
-            </div>
-        </div>
-
-    </div>
-    --> #}
 
 {#    mute because of bad groups and rows#}
 {#    {{ include('pages/user/_form.html.twig') }}#}
 
-    <a href="{{ path('user_index') }}" class="">back to list</a>
 
 {#    un role_user ne doit pas pouvoir supprimer son profil#}
 {#    {{ include('pages/user/_delete_form.html.twig') }}#}
