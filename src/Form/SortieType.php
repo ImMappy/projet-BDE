@@ -92,13 +92,7 @@ class SortieType extends AbstractType
             ->add('submit',SubmitType::class,[
                 'label'=> 'Enregistrer la sortie',
                 'attr'=>[
-                    'class'=>'mb-3 btn btn-outline-primary'
-                ]
-            ])
-            ->add('submit2',SubmitType::class,[
-                'label'=> 'Publier la sortie',
-                'attr'=>[
-                    'class'=>'mb-3 btn btn-outline-primary '
+                    'class'=>'mb-3 btn btn-primary'
                 ]
             ])
         ;
