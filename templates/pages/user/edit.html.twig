@@ -50,11 +50,12 @@
     </div>
     --> #}
 
-    {{ include('pages/user/_form.html.twig') }}
+{#    mute because of bad groups and rows#}
+{#    {{ include('pages/user/_form.html.twig') }}#}
 
     <a href="{{ path('user_index') }}" class="">back to list</a>
 
-{#    un role_user ne peut supprimer son profil#}
+{#    un role_user ne doit pas pouvoir supprimer son profil#}
 {#    {{ include('pages/user/_delete_form.html.twig') }}#}
 
 {% endblock %}

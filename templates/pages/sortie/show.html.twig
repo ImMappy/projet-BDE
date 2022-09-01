@@ -57,9 +57,13 @@
                 {%  if userCollection|length == sortie.nbInscriptionsMax%}
                     <h3 class="text-center">Evenement complet</h3>
                 {% endif %}
+                {%  if "now"|date('Y-m-d H:i:s') >= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
+                    <h3 class="text-center">Les inscriptions sont cloturées pour cette sortie</h3>
+                {% endif %}
+
             </div>
 
-            {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection%}
+            {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection and "now"|date('Y-m-d H:i:s') < sortie.dateLimiteInscription|date('Y-m-d H:i:s') %}
             <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
             {% endif %}
             {% if app.user in userCollection %}
