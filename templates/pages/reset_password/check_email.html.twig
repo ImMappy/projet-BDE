@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lien envoyé{% endblock %}
+
+{% block body %}
+
+    <p class="my-5 text-center">
+        Nous venons d'envoyer un lien vers l'email indiqué. Si un email correspond vous avez du recevoir un mail.
+        Ce lien va expirer dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p class="text-center">Si vous ne recevez pas d'email, vérifiez dans les spams ou <a href="{{ path('reset_password') }}">Réessayez</a>.</p>
+    <div class="d-flex justify-content-center my-3">
+        <a href="{{ path('app_login')}}" class="btn btn-primary">Retour au login</a>
+    </div>
+{% endblock %}
