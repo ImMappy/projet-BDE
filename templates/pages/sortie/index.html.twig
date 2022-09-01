@@ -142,6 +142,36 @@
         </div>
     </div>
     {% endif %}
+    <h2>Sorties annulées</h2>
+    {% for sortie in sorties %}
+        {% if sortie.motif != null %}
+        <div class="col-4 d-flex justify-content-center p-5 ">
+            <div class="card w-100 shadow-lg p-3 bg-white rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ sortie.nom }}</h5>
+                    <br>
+                    <p class="card-text">{{ sortie.infosSortie }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Date: {{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m - H:i') : ''  }}</li> {#  {{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m - H:i') : '' }} #}
+                    <li class="list-group-item">Durée: {{ sortie.duree }}</li>
+                    <li class="list-group-item">Limite d'inscription: {{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m - H:i') : '' }}</li>
+                    <li class="list-group-item">Organisateur: {{ sortie.organisateur.getFullName }}</li>
+                </ul>
+                <div class="card-body text-center">
+                    {% if app.user.id != sortie.organisateur.id %}
+                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
+                    {% else%}
+                        <a href="{{ path('sortie_show', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Détail</a>
+
+                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">Modifier</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+
     <div class="navigation d-flex justify-content-center my-5">
         {{ knp_pagination_render(sorties) }}
     </div>
