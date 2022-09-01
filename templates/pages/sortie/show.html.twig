@@ -4,11 +4,12 @@
 
 {% block body %}
     <div class="row container w-100 mx-auto">
-        <section class="col-6 col-xs-12">
+        <section class="col">
             <a href="{{ path('sortie_index') }}" class="btn btn-outline-secondary my-3">Retour a l'accueil</a>
-            <div id="map" class="w-75 shadow-lg p-3 mb-5 bg-white rounded border border-dark mt-5" style="height: 50%;" ></div>
+
+            <div id="map" class="w-75 shadow-lg p-3 mb-5 bg-white rounded border border-dark mt-5" style="height: 80vh;" ></div>
         </section>
-        <section class="col-6 col-xs-12 ">
+        <section class="col">
             <p id="lieu-id" hidden>{{ sortie.lieu.id }}</p>
             <h1 class="text-center my-5">Détail de la sortie</h1>
             <input type="hidden" id="sortie-lieu" value="{{ sortie.lieu.id }}">
