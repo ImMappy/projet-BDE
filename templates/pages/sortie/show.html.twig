@@ -45,7 +45,9 @@
                 </tr>
                 <tr>
                     <th>Organisateur(trice)</th>
-                    <td>{{ sortie.organisateur.getFullName }}</td>
+                    <td>
+                        <a class = "text-decoration-none text-black" href="{{ path('user_show',{'id':sortie.organisateur.id}) }}">    {{ sortie.organisateur.getFullName }}</a>
+                    </td>
                 </tr>
                 <tr>
                     <th>Inscription</th>
@@ -87,15 +89,13 @@
                         <h3 class="text-center">Evenement complet</h3>
                     {% endif %}
                 </div>
-                <div class="d-flex">
-                    {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection%}
-                        <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
-                    {% endif %}
-                    {% if app.user in userCollection and app.user.id != sortie.organisateur.id %}
+                {% if sortie.organisateur.id == app.user.id %}
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ path('sortie_edit',{'id':sortie.id}) }}" class="btn btn-warning mx-3">Modifier</a>
+                        <a href="{{ path('sortie_annuler',{'id':sortie.id}) }}" class="btn btn-danger">Annuler</a>
+                    </div>
 
-                        <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-3">Se désinscrire</a>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
                 {% else %}
                 <h4 class="text-center">Événement annulé</h4>
