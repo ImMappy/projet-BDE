@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 
+use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\CampusRepository;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -59,7 +61,7 @@ class SortieController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'sortie_index', methods: ['GET'])]
-    public function index(SortieRepository $sortieRepository,PaginatorInterface $paginator,Request $request): Response
+    public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, PaginatorInterface $paginator,Request $request): Response
     {
         $paginationSorties = $paginator->paginate(
             $sortieRepository->findAll(),
@@ -68,6 +70,7 @@ class SortieController extends AbstractController
         );
         return $this->render('pages/sortie/index.html.twig', [
             'sorties' => $paginationSorties,
+           'campuses' => $campusRepository->findAll()
         ]);
     }
 
