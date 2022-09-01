@@ -54,14 +54,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $isActif = false;
 
     #[ORM\OneToMany(mappedBy: 'organisateur', targetEntity: Sortie::class)]
-    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private Collection $sorties;
 
     #[ORM\ManyToMany(targetEntity: Sortie::class, mappedBy: 'user')]
     private Collection $sortiesInscrit;
 
     #[ORM\ManyToOne(inversedBy: 'user')]
-    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
     #[ORM\Column(length: 150, nullable: true)]

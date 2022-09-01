@@ -46,7 +46,7 @@ class Sortie
     private ?string $infosSortie = null;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
-    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $organisateur = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sortiesInscrit')]
