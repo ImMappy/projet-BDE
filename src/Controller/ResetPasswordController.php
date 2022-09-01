@@ -52,7 +52,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('reset_password/request.html.twig', [
+        return $this->render('pages/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -70,7 +70,7 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
-        return $this->render('reset_password/check_email.html.twig', [
+        return $this->render('pages/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
         ]);
     }
@@ -96,7 +96,7 @@ class ResetPasswordController extends AbstractController
 
         $token = $this->getTokenFromSession();
         if (null === $token) {
-            throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
+            throw $this->createNotFoundException('Aucun token de trouver pour cette page');
         }
 
         try {
@@ -134,7 +134,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('reset_password/reset.html.twig', [
+        return $this->render('pages/reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
     }
@@ -170,7 +170,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address('lem308308@gmail.com', 'Sortir.com'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/email.html.twig')
+            ->htmlTemplate('pages/reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
             ])

@@ -32,10 +32,9 @@
                                 <label for="campus" class="fw-bold mx-auto">Campus</label>
                                 <br>
                                 <select name="campus" id="campus" class="form-select w-100"> <!-- Put {campus} in this list -->
-                                    <option value="">Nantes</option>
-                                    <option value="">Rennes</option>
-                                    <option value="">Quimper</option>
-                                    <option value="">Niort</option>
+                                    {% for campus in campuses %}
+                                    <option value="">{{ campus }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="my-3">
