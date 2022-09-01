@@ -25,11 +25,7 @@ class UserType extends AbstractType
                 ]
 
             ])
-            ->add('password', PasswordType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
+
             ->add('nom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control'
