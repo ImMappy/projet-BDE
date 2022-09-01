@@ -106,12 +106,16 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->add($user, true);
+
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('password')->getData()
                 )
             );
+
+            $userRepository->add($user, true);
+
 //            $avatarFile = $form->get('image')->getData();
 //
 //            if ($avatarFile) {
@@ -131,10 +135,10 @@ class UserController extends AbstractController
 //                }
 //
 //                $user->setImage($newFilename);
-                $userRepository->add($user, true);
-            
-                return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
-            }
+//            }
+
+            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+        }
 
             return $this->renderForm('pages/user/edit.html.twig', [
                 'user' => $user,
@@ -142,20 +146,23 @@ class UserController extends AbstractController
             ]);
         }
 
-    /**
-     * Supprimer une entité User
-     * @param Request $request
-     * @param User $user
-     * @param UserRepository $userRepository
-     * @return Response
-     */
-    #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
+
+        /**
+         * Supprimer une entité User
+         * @param Request $request
+         * @param User $user
+         * @param UserRepository $userRepository
+         * @return Response
+         */
+        #[
+        Route('/{id}', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
         }
 
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

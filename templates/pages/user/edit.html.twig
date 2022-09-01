@@ -54,6 +54,7 @@
 
     <a href="{{ path('user_index') }}" class="">back to list</a>
 
-    {{ include('pages/user/_delete_form.html.twig') }}
+{#    un role_user ne peut supprimer son profil#}
+{#    {{ include('pages/user/_delete_form.html.twig') }}#}
 
 {% endblock %}
