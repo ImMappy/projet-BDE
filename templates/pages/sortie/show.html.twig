@@ -4,14 +4,14 @@
 
 {% block body %}
     <div class="row container w-100 mx-auto">
-        <section class="col">
+        <section class="col-6 col-xs-12">
             <a href="{{ path('sortie_index') }}" class="btn btn-outline-secondary my-3">Retour a l'accueil</a>
-
-            <div id="map" class="w-75 shadow-lg p-3 mb-5 bg-white rounded border border-dark mt-5" style="height: 80vh;" ></div>
+            <div id="map" class="w-75 shadow-lg p-3 mb-5 bg-white rounded border border-dark mt-5" style="height: 50%;" ></div>
         </section>
-        <section class="col">
+        <section class="col-6 col-xs-12 ">
             <p id="lieu-id" hidden>{{ sortie.lieu.id }}</p>
             <h1 class="text-center my-5">Détail de la sortie</h1>
+            <input type="hidden" id="sortie-lieu" value="{{ sortie.lieu.id }}">
         <table class="table mb-5">
             <tbody>
             <tr>
@@ -58,20 +58,21 @@
                     <h3 class="text-center">Evenement complet</h3>
                 {% endif %}
             </div>
-
-            {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection%}
-            <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
-            {% endif %}
-            {% if app.user in userCollection %}
-            <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-3">Se désinscrire</a>
-            {% endif %}
-            <div class="mx-3">
-                {% if app.user.id == sortie.organisateur.id %}
-                    {{ include('pages/sortie/_delete_form.html.twig') }}
-                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-warning mx-3">Modifier</a>
-
+            <div class="d-flex">
+                {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection%}
+                    <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-3">S'inscrire</a>
                 {% endif %}
+                {% if app.user in userCollection and app.user.id != sortie.organisateur.id %}
+                    <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-3">Se désinscrire</a>
+                {% endif %}
+                <div class="d-flex justify-content-center ">
+                    {% if app.user.id == sortie.organisateur.id %}
+                        {{ include('pages/sortie/_delete_form.html.twig') }}
+                        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-outline-warning mx-3">Modifier</a>
+                    {% endif %}
+                </div>
             </div>
+
         </div>
         </section>
 
