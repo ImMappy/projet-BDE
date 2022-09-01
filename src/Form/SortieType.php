@@ -72,33 +72,33 @@ class SortieType extends AbstractType
                 'class'=>Campus::class,
                 'label'=>'Campus',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'mb-3 form-control'
                 ],
             ])
             ->add('etat',EntityType::class,[
                 'class'=>Etat::class,
                 'label'=>'Etat',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'mb-3 form-control'
                 ],
             ])
             ->add('lieu',EntityType::class,[
                 'class'=>Lieu::class,
                 'label'=>'Lieu',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'mb-3 form-control'
                 ],
             ])
             ->add('submit',SubmitType::class,[
                 'label'=> 'Enregistrer la sortie',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'mb-3 btn btn-outline-primary'
                 ]
             ])
             ->add('submit2',SubmitType::class,[
                 'label'=> 'Publier la sortie',
                 'attr'=>[
-                    'class'=>'mb-3'
+                    'class'=>'mb-3 btn btn-outline-primary '
                 ]
             ])
         ;
