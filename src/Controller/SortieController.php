@@ -186,7 +186,7 @@ class SortieController extends AbstractController
         $entityManager->persist($sortie);
         $entityManager->flush();
 
-        return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/desist', name: 'sortie_desist', methods: ['GET','POST'])]
@@ -196,7 +196,7 @@ class SortieController extends AbstractController
         $entityManager->persist($sortie);
         $entityManager->flush();
 
-        return $this->redirectToRoute('sortie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
     }
 
 
