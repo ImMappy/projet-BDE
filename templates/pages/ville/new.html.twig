@@ -3,9 +3,14 @@
 {% block title %}New Ville{% endblock %}
 
 {% block body %}
-    <h1>Create new Ville</h1>
+    <div class="d-flex justify-content-start">
+        <a class="btn btn-outline-secondary my-3 mx-3" href="{{ path('ville_index') }}">Retour a la liste</a>
+    </div>
+    <h1 class="text-center my-4">Ajouter une ville</h1>
+    <section class="w-75 mx-auto">
+        {{ include('pages/ville/_form.html.twig') }}
 
-    {{ include('pages/ville/_form.html.twig') }}
+    </section>
 
-    <a href="{{ path('ville_index') }}">back to list</a>
+
 {% endblock %}
