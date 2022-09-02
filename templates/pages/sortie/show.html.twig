@@ -57,13 +57,13 @@
                                     {% if sortie.motif == null %}
                                         {% if userCollection|length < sortie.nbInscriptionsMax and app.user.id != sortie.organisateur.id and app.user not in userCollection and "now"|date('Y-m-d H:i:s') <= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
                                             <p class="mt-2 text-start ">Vous n'êtes pas inscrit</p>
-                                            <a href="{{ path('sortie_register_event', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-2 h-50">S'inscrire</a>
+                                            <a href="{{ path('sortie_action_user', {'id': sortie.id}) }}" class="btn btn-outline-secondary mx-2 h-50">S'inscrire</a>
                                         {% endif %}
                                         {% if app.user in userCollection and "now"|date('Y-m-d H:i:s') <= sortie.dateLimiteInscription|date('Y-m-d H:i:s')%}
                                             <p class="mt-2 text-start ">Vous êtes inscrit</p>
-                                            <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
+                                            <a href="{{ path('sortie_action_user', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
                                                 {% if "now"|date('Y-m-d H:i:s') >= sortie.dateLimiteInscription|date('Y-m-d H:i:s') %}
-                                            <a href="{{ path('sortie_desist', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
+                                            <a href="{{ path('sortie_action_user', {'id': sortie.id}) }}" class="btn btn-outline-danger mx-2 h-50">Se désinscrire</a>
                                                 {% endif %}
                                         {% endif %}
                                     {% endif %}
