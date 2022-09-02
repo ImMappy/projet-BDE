@@ -190,23 +190,7 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/annuler/{id}',name: 'sortie_annuler',methods: ['GET','POST'])]
-    public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, $id) : Response
-    {
-        $sortieRepository->find($id);
-        $form = $this->createForm(CancelType::class,$sortie);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $entityManager->persist($sortie);
-            $entityManager->flush();
-            $this->redirectToRoute('sortie_index');
-        }
-        return $this->renderForm('pages/sortie/cancel.html.twig',[
-            'form'=>$form,
-            'sortie'=>$sortie
-        ]);
-    }
+
     #[Route('/{id}/desist', name: 'sortie_desist', methods: ['GET','POST'])]
     public function desist(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
@@ -217,7 +201,24 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_show', ['id' => $sortie->getId()], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/annuler/{id}',name: 'sortie_annuler',methods: ['GET','POST'])]
+    public function annuler(Request $request, Sortie $sortie, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, $id) : Response
+    {
+        $sortieRepository->find($id);
+        $form = $this->createForm(CancelType::class,$sortie);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
+            $this->redirectToRoute('sortie_index');
+        }
+        return $this->renderForm('pages/sortie/cancel.html.twig',[
+            'form'=>$form, // association du nom à la valeur
+            'sortie'=>$sortie
+        ]);
+    }
 
 
 
