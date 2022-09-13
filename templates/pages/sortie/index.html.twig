@@ -22,23 +22,19 @@
             </div>
         </div>
 
-
-
-
-
         <div class="row p-5">
             <div class="card shadow-sm bg-white rounded">
                 <div class="row">
                 <!-- ################################################################################### campus & recherche-->
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center mt-2">
                         <div class="flex-column">
                             <div class="my-3">
                                 <label for="campus" class="fw-bold mx-auto">Campus</label>
                                 <br>
                                 <select name="campus" id="campus" class="form-select w-100"> <!-- Put {campus} in this list -->
-                                    <option selected>Selectionez votre campus</option>
-                                    <option value="">Paris</option>
                                     <option value="">Nantes</option>
+                                    <option value="">Rennes</option>
+                                    <option value="">Quimper</option>
                                     <option value="">Niort</option>
                                 </select>
                             </div>
@@ -50,7 +46,7 @@
                         </div>
                     </div>
                     <!-- ################################################################################### Date -->
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center mt-2">
                         <div class="flex-column">
                             <div class="my-3">
                                 <label for="start" class="fw-bold">Entre</label>
@@ -69,7 +65,7 @@
                         </div>
                     </div>
                     <!-- ################################################################################### Checkbox -->
-                    <div class="col-4 d-flex align-content-center">
+                    <div class="col-4 d-flex align-content-center mt-2">
                         <div class="m-auto mt-3">
                             <fieldset>
                                 <label for="filtres" class="fw-bold">Filtres</label>
@@ -102,9 +98,6 @@
 
             </div>
         </div>
-
-
-
 
         <div class="row">
             {% for sortie in sorties %}
